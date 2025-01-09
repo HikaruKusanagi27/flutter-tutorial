@@ -13,28 +13,29 @@ class BuildingLayoutPage extends StatelessWidget {
           title: Center(child: const Text(appTitle)),
         ),
         body: SingleChildScrollView(
-            child: Column(
-          children: [
-            ImageSection(
-              image: 'images/lake.jpg',
-            ),
-            TitleSection(
-              name: 'Oeschinen Lake Campground',
-              location: 'Kandersteg, Switzerland',
-            ),
-            ButtonSection(),
-            TextSection(
-              description:
-                  'Lake Oeschinen lies at the foot of the Blüemlisalp in the '
-                  'Bernese Alps. Situated 1,578 meters above sea level, it '
-                  'is one of the larger Alpine Lakes. A gondola ride from '
-                  'Kandersteg, followed by a half-hour walk through pastures '
-                  'and pine forest, leads you to the lake, which warms to 20 '
-                  'degrees Celsius in the summer. Activities enjoyed here '
-                  'include rowing, and riding the summer toboggan run.',
-            ),
-          ],
-        )),
+          child: Column(
+            children: [
+              ImageSection(
+                image: 'images/lake.jpg',
+              ),
+              TitleSection(
+                name: 'Oeschinen Lake Campground',
+                location: 'Kandersteg, Switzerland',
+              ),
+              ButtonSection(),
+              TextSection(
+                description:
+                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the '
+                    'Bernese Alps. Situated 1,578 meters above sea level, it '
+                    'is one of the larger Alpine Lakes. A gondola ride from '
+                    'Kandersteg, followed by a half-hour walk through pastures '
+                    'and pine forest, leads you to the lake, which warms to 20 '
+                    'degrees Celsius in the summer. Activities enjoyed here '
+                    'include rowing, and riding the summer toboggan run.',
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -134,22 +135,23 @@ class ButtonWithText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: color),
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: color,
-              ),
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
             ),
           ),
-        ]);
+        ),
+      ],
+    );
   }
 }
 
@@ -201,15 +203,17 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
   int _favoriteCount = 41;
 
   void _toggleFavorite() {
-    setState(() {
-      if (_isFavorited) {
-        _favoriteCount -= 1;
-        _isFavorited = false;
-      } else {
-        _favoriteCount += 1;
-        _isFavorited = true;
-      }
-    });
+    setState(
+      () {
+        if (_isFavorited) {
+          _favoriteCount -= 1;
+          _isFavorited = false;
+        } else {
+          _favoriteCount += 1;
+          _isFavorited = true;
+        }
+      },
+    );
   }
 
   @override
