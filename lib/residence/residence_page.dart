@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ResidencePage extends StatelessWidget {
+class ResidencePage extends StatefulWidget {
   const ResidencePage({
     super.key,
     required this.homeImage,
@@ -11,189 +11,64 @@ class ResidencePage extends StatelessWidget {
   final String madoriImage;
 
   @override
+  _ResidencePageState createState() => _ResidencePageState();
+}
+
+class _ResidencePageState extends State<ResidencePage> {
+  final ScrollController _scrollController = ScrollController();
+  final List<Widget> _videoCards = List.generate(10, (_) => _PropertyCard());
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent &&
+        !_isLoading) {
+      _loadMoreItems();
+    }
+  }
+
+  Future<void> _loadMoreItems() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    await Future.delayed(Duration(seconds: 2));
+
+    List<Widget> newItems = List.generate(10, (_) => _PropertyCard());
+    setState(() {
+      _videoCards.addAll(newItems);
+      _isLoading = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.keyboard_arrow_left, color: Colors.teal, size: 32),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Row(
+      appBar: _AppBarWidget(),
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[300],
-              ),
-              child: Text(
-                'おすすめ',
-                style: TextStyle(
-                  color: Colors.teal[200],
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            SizedBox(width: 10),
-            Stack(
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey[300],
-                  ),
-                  child: Text(
-                    'リフォーム',
-                    style: TextStyle(
-                      color: Colors.teal[200],
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  right: 0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    constraints: BoxConstraints(
-                      minHeight: 12,
-                      minWidth: 12,
-                    ),
-                    child: Text(
-                      '1',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add_circle, color: Colors.teal, size: 32),
-            onPressed: () {},
-          ),
-          SizedBox(width: 10),
-        ],
-      ),
-      body: Column(
-        children: [
-          Card(
-            color: Colors.white,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Text(
-                            'カウルのおすすめ',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          '新着3件',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '編集',
-                          style: TextStyle(
-                            color: Colors.teal,
-                            fontSize: 12,
-                          ),
-                        ),
-                        Icon(Icons.mode_edit, color: Colors.teal),
-                      ],
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    padding: const EdgeInsets.all(5.0),
-                    width: 400,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.train,
-                            ),
-                            const Text(
-                              '東京駅・品川駅・川崎駅・横浜駅・目黒駅',
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.monetization_on,
-                            ),
-                            const Text(
-                              '下限なし〜2,000万円',
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.info_outline,
-                            ),
-                            const Text(
-                              '1R〜4LDK / 10m²以上 / 徒歩20分',
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
+            _RecommendedPropertiesCard(),
+            ListView.builder(
+              controller: _scrollController,
+              itemCount: _videoCards.length + (_isLoading ? 1 : 0),
+              shrinkWrap: true,
               itemBuilder: (context, index) {
-                return _buildCard();
+                if (index == _videoCards.length && _isLoading) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return _videoCards[index];
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         shape: CircleBorder(),
@@ -277,8 +152,205 @@ class ResidencePage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildCard() {
+class _RecommendedPropertiesCard extends StatelessWidget {
+  const _RecommendedPropertiesCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.white,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text(
+                      'カウルのおすすめ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    '新着3件',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    '編集',
+                    style: TextStyle(
+                      color: Colors.teal,
+                      fontSize: 12,
+                    ),
+                  ),
+                  Icon(Icons.mode_edit, color: Colors.teal),
+                ],
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.all(5.0),
+              width: 400,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 5),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.train,
+                      ),
+                      const Text(
+                        '東京駅・品川駅・川崎駅・横浜駅・目黒駅',
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.monetization_on,
+                      ),
+                      const Text(
+                        '下限なし〜2,000万円',
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                      ),
+                      const Text(
+                        '1R〜4LDK / 10m²以上 / 徒歩20分',
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+}
+
+class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+  const _AppBarWidget();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      leading: IconButton(
+        icon: Icon(Icons.keyboard_arrow_left, color: Colors.teal, size: 32),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+      title: Row(
+        children: [
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey[300],
+            ),
+            child: Text(
+              'おすすめ',
+              style: TextStyle(
+                color: Colors.teal[200],
+                fontSize: 12,
+              ),
+            ),
+          ),
+          SizedBox(width: 10),
+          Stack(
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[300],
+                ),
+                child: Text(
+                  'リフォーム',
+                  style: TextStyle(
+                    color: Colors.teal[200],
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              Positioned(
+                right: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  constraints: BoxConstraints(
+                    minHeight: 12,
+                    minWidth: 12,
+                  ),
+                  child: Text(
+                    '1',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add_circle, color: Colors.teal, size: 32),
+          onPressed: () {},
+        ),
+        SizedBox(width: 10),
+      ],
+    );
+  }
+}
+
+class _PropertyCard extends StatelessWidget {
+  const _PropertyCard();
+
+  final String homeImage = 'images/home.png';
+  final String madoriImage = 'images/madori.png';
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
       child: Column(
