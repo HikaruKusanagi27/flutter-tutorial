@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ResidencePage extends StatefulWidget {
+class ResidencePage extends StatelessWidget {
   const ResidencePage({
     super.key,
     required this.homeImage,
@@ -11,44 +11,6 @@ class ResidencePage extends StatefulWidget {
   final String madoriImage;
 
   @override
-  _ResidencePageState createState() => _ResidencePageState();
-}
-
-class _ResidencePageState extends State<ResidencePage> {
-  final ScrollController _scrollController = ScrollController();
-  final List<Widget> _videoCards = List.generate(10, (_) => _PropertyCard());
-  bool _isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _scrollController.addListener(_scrollListener);
-  }
-
-  void _scrollListener() {
-    if (_scrollController.position.pixels ==
-            _scrollController.position.maxScrollExtent &&
-        !_isLoading) {
-      _loadMoreItems();
-    }
-  }
-
-  Future<void> _loadMoreItems() async {
-    setState(() {
-      _isLoading = true;
-    });
-
-    await Future.delayed(Duration(seconds: 2));
-
-    List<Widget> newItems = List.generate(10, (_) => _PropertyCard());
-    setState(() {
-      _videoCards.addAll(newItems);
-      _isLoading = false;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _AppBarWidget(),
@@ -56,17 +18,8 @@ class _ResidencePageState extends State<ResidencePage> {
         child: Column(
           children: [
             _RecommendedPropertiesCard(),
-            ListView.builder(
-              controller: _scrollController,
-              itemCount: _videoCards.length + (_isLoading ? 1 : 0),
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                if (index == _videoCards.length && _isLoading) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                return _videoCards[index];
-              },
-            ),
+            _PropertyCard(),
+            _PropertyCard(),
           ],
         ),
       ),
@@ -90,172 +43,7 @@ class _ResidencePageState extends State<ResidencePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: 'お気に入り',
-          ),
-          BottomNavigationBarItem(
-            icon: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Icon(
-                  Icons.message,
-                  color: Colors.grey,
-                ),
-                Positioned(
-                  top: -4,
-                  right: -4,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    constraints: BoxConstraints(
-                      minHeight: 12,
-                      minWidth: 12,
-                    ),
-                    child: Text(
-                      '1',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                  ),
-                ),
-              ],
-            ),
-            label: 'メッセージ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'マイページ',
-          ),
-        ],
-        selectedLabelStyle: const TextStyle(
-          fontSize: 10,
-        ),
-        unselectedLabelStyle: const TextStyle(
-          fontSize: 10,
-        ),
-        currentIndex: 0,
-        backgroundColor: Colors.white,
-        selectedItemColor: Colors.teal,
-        unselectedItemColor: Colors.grey,
-        onTap: (int index) {},
-      ),
-    );
-  }
-}
-
-class _RecommendedPropertiesCard extends StatelessWidget {
-  const _RecommendedPropertiesCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Text(
-                      'カウルのおすすめ',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    '新着3件',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    '編集',
-                    style: TextStyle(
-                      color: Colors.teal,
-                      fontSize: 12,
-                    ),
-                  ),
-                  Icon(Icons.mode_edit, color: Colors.teal),
-                ],
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: const EdgeInsets.all(5.0),
-              width: 400,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: 5),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.train,
-                      ),
-                      const Text(
-                        '東京駅・品川駅・川崎駅・横浜駅・目黒駅',
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.monetization_on,
-                      ),
-                      const Text(
-                        '下限なし〜2,000万円',
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.info_outline,
-                      ),
-                      const Text(
-                        '1R〜4LDK / 10m²以上 / 徒歩20分',
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-        ],
-      ),
+      bottomNavigationBar: BottomBarWidget(),
     );
   }
 }
@@ -280,13 +68,14 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey[300],
+              backgroundColor: Colors.grey[200],
             ),
             child: Text(
               'おすすめ',
               style: TextStyle(
-                color: Colors.teal[200],
+                color: Colors.teal[300],
                 fontSize: 12,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -296,13 +85,14 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey[300],
+                  backgroundColor: Colors.grey[200],
                 ),
                 child: Text(
                   'リフォーム',
                   style: TextStyle(
-                    color: Colors.teal[200],
+                    color: Colors.teal[300],
                     fontSize: 12,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -317,6 +107,7 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     minHeight: 12,
                     minWidth: 12,
                   ),
+                  alignment: Alignment.center,
                   child: Text(
                     '1',
                     style: TextStyle(
@@ -325,7 +116,6 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       fontSize: 12,
                     ),
                   ),
-                  alignment: Alignment.center,
                 ),
               ),
             ],
@@ -338,6 +128,122 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {},
         ),
         SizedBox(width: 10),
+      ],
+    );
+  }
+}
+
+class _RecommendedPropertiesCard extends StatelessWidget {
+  const _RecommendedPropertiesCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Card(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Text(
+                          'カウルのおすすめ',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '新着3件',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '編集',
+                        style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Icon(Icons.mode_edit, color: Colors.teal),
+                    ],
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: const EdgeInsets.all(5.0),
+                  width: 400,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
+                          SizedBox(width: 5),
+                          Icon(
+                            Icons.train,
+                          ),
+                          SizedBox(width: 5),
+                          const Text(
+                            '東京駅・品川駅・川崎駅・横浜駅・目黒駅',
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
+                          SizedBox(width: 5),
+                          Icon(
+                            Icons.monetization_on,
+                          ),
+                          SizedBox(width: 5),
+                          const Text(
+                            '下限なし〜2,000万円',
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
+                          SizedBox(width: 5),
+                          Icon(
+                            Icons.info_outline,
+                          ),
+                          SizedBox(width: 5),
+                          const Text(
+                            '1R〜4LDK / 10m²以上 / 徒歩20分',
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -397,10 +303,11 @@ class _PropertyCard extends StatelessWidget {
                 SizedBox(height: 5),
                 Row(
                   children: [
-                    SizedBox(width: 10),
+                    SizedBox(width: 5),
                     Icon(
                       Icons.train,
                     ),
+                    SizedBox(width: 5),
                     Text(
                       '京急本線 京急川崎駅 より 徒歩9分',
                       style: TextStyle(
@@ -413,10 +320,11 @@ class _PropertyCard extends StatelessWidget {
                 SizedBox(height: 5),
                 Row(
                   children: [
-                    SizedBox(width: 10),
+                    SizedBox(width: 5),
                     Icon(
                       Icons.monetization_on,
                     ),
+                    SizedBox(width: 5),
                     Text(
                       '1K / 21.24m² 南西向き',
                       style: TextStyle(
@@ -429,10 +337,11 @@ class _PropertyCard extends StatelessWidget {
                 SizedBox(height: 5),
                 Row(
                   children: [
-                    SizedBox(width: 10),
+                    SizedBox(width: 5),
                     Icon(
                       Icons.info_outline,
                     ),
+                    SizedBox(width: 5),
                     Text(
                       '2階/15階建 築5年',
                       style: TextStyle(
@@ -499,6 +408,76 @@ class _PropertyCard extends StatelessWidget {
           SizedBox(height: 10),
         ],
       ),
+    );
+  }
+}
+
+class BottomBarWidget extends StatelessWidget {
+  const BottomBarWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.favorite_border),
+          label: 'お気に入り',
+        ),
+        BottomNavigationBarItem(
+          icon: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Icon(
+                Icons.message,
+                color: Colors.grey,
+              ),
+              Positioned(
+                top: -4,
+                right: -4,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  constraints: BoxConstraints(
+                    minHeight: 12,
+                    minWidth: 12,
+                  ),
+                  child: Text(
+                    '1',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                ),
+              ),
+            ],
+          ),
+          label: 'メッセージ',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person_outline),
+          label: 'マイページ',
+        ),
+      ],
+      selectedLabelStyle: const TextStyle(
+        fontSize: 10,
+      ),
+      unselectedLabelStyle: const TextStyle(
+        fontSize: 10,
+      ),
+      currentIndex: 0,
+      backgroundColor: Colors.white,
+      selectedItemColor: Colors.teal,
+      unselectedItemColor: Colors.grey,
+      onTap: (int index) {},
     );
   }
 }
