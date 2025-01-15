@@ -25,11 +25,7 @@ class IndexPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => ResidencePage(
-                              homeImage: 'images/home.png',
-                              madoriImage: 'images/madori.png',
-                            )),
+                    MaterialPageRoute(builder: (context) => ResidencePage()),
                   );
                 },
                 child: Text('2.2 Residence')),
