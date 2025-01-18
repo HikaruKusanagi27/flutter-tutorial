@@ -442,10 +442,6 @@ class BottomBarWidget extends StatelessWidget {
                     minHeight: 12,
                     minWidth: 12,
                   ),
-<<<<<<< HEAD
-                  alignment: Alignment.center,
-=======
->>>>>>> 8e1bb1478cc93739fc974afe04ad9ce46735b0e8
                   child: Text(
                     '1',
                     style: TextStyle(
@@ -454,10 +450,7 @@ class BottomBarWidget extends StatelessWidget {
                       fontSize: 12,
                     ),
                   ),
-<<<<<<< HEAD
-=======
                   alignment: Alignment.center,
->>>>>>> 8e1bb1478cc93739fc974afe04ad9ce46735b0e8
                 ),
               ),
             ],
