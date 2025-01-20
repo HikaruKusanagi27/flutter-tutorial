@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test/building/building_layout_page.dart';
-import 'package:test/residence/residence_page.dart';
 import 'package:test/animation/animation_page.dart';
+import 'package:test/building/building_layout_page.dart';
 
 class IndexPage extends StatelessWidget {
   const IndexPage({super.key});
@@ -9,11 +8,11 @@ class IndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -22,7 +21,9 @@ class IndexPage extends StatelessWidget {
                   );
                 },
                 child: Text('Tutorial1')),
-            ElevatedButton(
+          ),
+          Center(
+            child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -30,16 +31,8 @@ class IndexPage extends StatelessWidget {
                   );
                 },
                 child: Text('Tutorial1-1')),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ResidencePage()),
-                  );
-                },
-                child: Text('2.2 Residence')),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
