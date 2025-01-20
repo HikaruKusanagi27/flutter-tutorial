@@ -8,11 +8,11 @@ class IndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: ElevatedButton(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -21,9 +21,7 @@ class IndexPage extends StatelessWidget {
                   );
                 },
                 child: Text('Tutorial1')),
-          ),
-          Center(
-            child: ElevatedButton(
+            ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -31,8 +29,8 @@ class IndexPage extends StatelessWidget {
                   );
                 },
                 child: Text('Tutorial1-1')),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
