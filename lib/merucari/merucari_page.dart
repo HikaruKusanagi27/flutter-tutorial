@@ -30,7 +30,6 @@ class MerucariPage extends StatelessWidget {
               _CategorySection(
                 howToStartSellingImage: 'images/how_to_start_selling.png',
               ),
-              _EasyToSellThing(),
               _ExhibitionList(
                 cameraImage: 'images/camera.png',
               ),
@@ -197,11 +196,10 @@ class _CategorySection extends StatelessWidget {
   }
 }
 
-class _EasyToSellThing extends StatelessWidget {
-  const _EasyToSellThing();
+class _ExhibitionList extends StatelessWidget {
+  const _ExhibitionList({required this.cameraImage});
 
-  final String homeImage = 'images/home.png';
-  final String madoriImage = 'images/madori.png';
+  final String cameraImage;
 
   @override
   Widget build(BuildContext context) {
@@ -257,23 +255,6 @@ class _EasyToSellThing extends StatelessWidget {
             thickness: 0.5,
             color: Colors.grey[300],
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ExhibitionList extends StatelessWidget {
-  const _ExhibitionList({required this.cameraImage});
-
-  final String cameraImage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
