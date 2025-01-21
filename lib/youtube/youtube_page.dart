@@ -14,7 +14,7 @@ class YoutubePage extends StatelessWidget {
         child: Column(
           children: [
             _CategoryWidget(),
-            _VideoCard(),
+            _VideoList(),
           ],
         ),
       ),
@@ -211,10 +211,8 @@ class _CategoryCard extends StatelessWidget {
 }
 
 class _VideoCard extends StatelessWidget {
-  const _VideoCard();
-
-  final String arashiyoutube = 'images/arashiyoutube.png';
-  final String arashiicon = 'images/arashiicon.png';
+  final MovieInfo data;
+  const _VideoCard(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -222,7 +220,105 @@ class _VideoCard extends StatelessWidget {
       color: Colors.grey[900],
       child: Column(
         children: [
+          Image.asset(data.imagePath),
+          SizedBox(height: 10),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  SizedBox(width: 10),
+                  SizedBox(
+                    width: 35,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.asset(data.iconPath),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        data.title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(width: 10),
+              Column(
+                children: [
+                  Icon(Icons.more_vert, color: Colors.white),
+                  SizedBox(height: 14),
+                ],
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              SizedBox(width: 54),
+              Text(
+                data.subTitle,
+                style: TextStyle(
+                  color: Colors.grey[500],
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+}
+
+// 1. クラスを作成
+class MovieInfo {
+  final String imagePath; // サムネイル画像のパス
+  final String iconPath; // アイコン画像のパス
+  final String title; // 動画タイトル
+  final String subTitle; // サブタイトル
+
+  MovieInfo({
+    required this.imagePath,
+    required this.iconPath,
+    required this.title,
+    required this.subTitle,
+  });
+}
+
+// 2. ダミーデータの作成
+class _VideoList extends StatelessWidget {
+  _VideoList();
+
+  final List<MovieInfo> _dummyMovieData = [
+    MovieInfo(
+      imagePath: 'images/arashiyoutube.png',
+      iconPath: 'images/arashiicon.png',
+      title: '"This is ARASHI LIVE 2020.12.31" Digest\nMovie',
+      subTitle: 'ARASHI・127万 回視聴・1日前',
+    ),
+    MovieInfo(
+      imagePath: 'images/arashiyoutube.png',
+      iconPath: 'images/arashiicon.png',
+      title: '"This is ARASHI LIVE 2020.12.31" Digest\nMovie',
+      subTitle: 'ARASHI・127万 回視聴・1日前',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: Colors.grey[900],
+          child: Row(
             children: [
               Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -236,112 +332,17 @@ class _VideoCard extends StatelessWidget {
               ),
             ],
           ),
-          Image.asset(arashiyoutube),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  SizedBox(
-                    width: 35,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Image.asset(arashiicon),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '"This is ARASHI LIVE 2020.12.31" Digest\nMovie',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(width: 10),
-              Column(
-                children: [
-                  Icon(Icons.more_vert, color: Colors.white),
-                  SizedBox(height: 14),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(width: 54),
-              Text(
-                'ARASHI・127万 回視聴・1日前',
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Image.asset(arashiyoutube),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  SizedBox(
-                    width: 35,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Image.asset(arashiicon),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '"This is ARASHI LIVE 2020.12.31" Digest\nMovie',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(width: 10),
-              Column(
-                children: [
-                  Icon(Icons.more_vert, color: Colors.white),
-                  SizedBox(height: 14),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              SizedBox(width: 54),
-              Text(
-                'ARASHI・127万 回視聴・1日前',
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-        ],
-      ),
+        ),
+        ListView.builder(
+          itemCount: _dummyMovieData.length,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            final data = _dummyMovieData[index];
+            return _VideoCard(data);
+          },
+        ),
+      ],
     );
   }
 }
