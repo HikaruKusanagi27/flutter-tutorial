@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/animation/animation_page.dart';
 import 'package:test/building/building_layout_page.dart';
-import 'package:test/youtube/youtube_page.dart';
+import 'package:test/residence/residence_page.dart';
 
 class IndexPage extends StatelessWidget {
   const IndexPage({super.key});
@@ -34,10 +34,10 @@ class IndexPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => YoutubePage()),
+                    MaterialPageRoute(builder: (context) => ResidencePage()),
                   );
                 },
-                child: Text('2.1 YouTube')),
+                child: Text('2.2 Residence')),
           ],
         ),
       ),
