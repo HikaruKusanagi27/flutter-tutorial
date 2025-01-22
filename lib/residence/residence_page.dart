@@ -257,15 +257,20 @@ class _PropertyCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: Image.asset(homeImage)),
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: Image.asset(
+                  homeImage,
+                ),
+              ),
               SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  child: Image.asset(madoriImage)),
-              SizedBox(width: 5),
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: Image.asset(
+                  madoriImage,
+                ),
+              ),
+              SizedBox(),
             ],
           ),
-          SizedBox(width: 10),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -349,11 +354,11 @@ class _PropertyCard extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
                       padding: const EdgeInsets.all(5),
-                      width: 160,
+                      width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey, width: 2.0),
                         borderRadius: BorderRadius.circular(4),
@@ -373,10 +378,9 @@ class _PropertyCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(width: 10),
                     Container(
                       padding: const EdgeInsets.all(5),
-                      width: 160,
+                      width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey, width: 2.0),
                         borderRadius: BorderRadius.circular(4),
@@ -401,7 +405,6 @@ class _PropertyCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 10),
         ],
       ),
     );
