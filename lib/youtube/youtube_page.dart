@@ -13,8 +13,8 @@ class YoutubePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _CategoryWidget(),
-            _VideoList(),
+            _CategorySection(),
+            _VideoSection(),
           ],
         ),
       ),
@@ -97,83 +97,84 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class _CategoryWidget extends StatelessWidget {
-  const _CategoryWidget();
+class _CategorySection extends StatelessWidget {
+  const _CategorySection();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Column(
           children: [
-            _CategoryCard(
-              label: '急上昇',
-              icon: Icons.local_fire_department,
-              color: Colors.red[900],
+            SizedBox(height: 10),
+            Row(
+              children: [
+                _CategoryTile(
+                  label: '急上昇',
+                  icon: Icons.local_fire_department,
+                  color: Colors.red[900],
+                ),
+                _CategoryTile(
+                  label: '音楽',
+                  icon: Icons.music_note,
+                  color: Colors.teal[300],
+                ),
+              ],
             ),
-            _CategoryCard(
-              label: '音楽',
-              icon: Icons.music_note,
-              color: Colors.teal[300],
+            Row(
+              children: [
+                _CategoryTile(
+                  label: 'ゲーム',
+                  icon: Icons.gamepad,
+                  color: Colors.brown[400],
+                ),
+                _CategoryTile(
+                  label: 'ニュース',
+                  icon: Icons.article,
+                  color: Colors.blue[900],
+                ),
+              ],
             ),
+            Row(
+              children: [
+                _CategoryTile(
+                  label: '学び',
+                  icon: Icons.highlight,
+                  color: Colors.green[900],
+                ),
+                _CategoryTile(
+                  label: 'ライブ',
+                  icon: Icons.live_tv,
+                  color: Colors.orange[800],
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                _CategoryTile(
+                  label: 'スポーツ',
+                  icon: Icons.sports,
+                  color: Colors.cyan[800],
+                ),
+                _CategoryTile(
+                  label: '',
+                  icon: null,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _CategoryCard(
-              label: 'ゲーム',
-              icon: Icons.gamepad,
-              color: Colors.brown[400],
-            ),
-            _CategoryCard(
-              label: 'ニュース',
-              icon: Icons.article,
-              color: Colors.blue[900],
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _CategoryCard(
-              label: '学び',
-              icon: Icons.highlight,
-              color: Colors.green[900],
-            ),
-            _CategoryCard(
-              label: 'ライブ',
-              icon: Icons.live_tv,
-              color: Colors.orange[800],
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _CategoryCard(
-              label: 'スポーツ',
-              icon: Icons.sports,
-              color: Colors.cyan[800],
-            ),
-            _CategoryCard(
-              label: '',
-              icon: null,
-              color: Colors.black,
-            ),
-          ],
-        ),
-        SizedBox(height: 10),
       ],
     );
   }
 }
 
 // インナークラス　(他の箇所からアクセスできないようにする)
-class _CategoryCard extends StatelessWidget {
-  const _CategoryCard({
+class _CategoryTile extends StatelessWidget {
+  const _CategoryTile({
     required this.label,
     this.icon,
     this.color,
@@ -210,9 +211,9 @@ class _CategoryCard extends StatelessWidget {
   }
 }
 
-class _VideoCard extends StatelessWidget {
+class _VideoList extends StatelessWidget {
   final MovieInfo data;
-  const _VideoCard(this.data);
+  const _VideoList(this.data);
 
   @override
   Widget build(BuildContext context) {
@@ -294,8 +295,8 @@ class MovieInfo {
 }
 
 // 2. ダミーデータの作成
-class _VideoList extends StatelessWidget {
-  _VideoList();
+class _VideoSection extends StatelessWidget {
+  _VideoSection();
 
   final List<MovieInfo> _dummyMovieData = [
     MovieInfo(
@@ -339,7 +340,7 @@ class _VideoList extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             final data = _dummyMovieData[index];
-            return _VideoCard(data);
+            return _VideoList(data);
           },
         ),
       ],
