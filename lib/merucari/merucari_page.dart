@@ -27,12 +27,8 @@ class MerucariPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _CategorySection(
-                howToStartSellingImage: 'images/how_to_start_selling.png',
-              ),
-              _ExhibitionList(
-                cameraImage: 'images/camera.png',
-              ),
+              _CategorySection(),
+              _ExhibitionSection(),
             ],
           ),
         ),
@@ -54,9 +50,9 @@ class MerucariPage extends StatelessWidget {
 }
 
 class _CategorySection extends StatelessWidget {
-  const _CategorySection({required this.howToStartSellingImage});
+  const _CategorySection();
 
-  final String howToStartSellingImage;
+  final String howToStartSellingImage = 'images/how_to_start_selling.png';
 
   @override
   Widget build(BuildContext context) {
@@ -196,10 +192,10 @@ class _CategorySection extends StatelessWidget {
   }
 }
 
-class _ExhibitionList extends StatelessWidget {
-  const _ExhibitionList({required this.cameraImage});
+class _ExhibitionSection extends StatelessWidget {
+  const _ExhibitionSection();
 
-  final String cameraImage;
+  final String cameraImage = 'images/camera.png';
 
   @override
   Widget build(BuildContext context) {
