@@ -9,8 +9,8 @@ class YoutubePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: _AppBarWidget(),
-      body: SingleChildScrollView(
+      appBar: const _AppBarWidget(),
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             _CategorySection(),
@@ -22,17 +22,22 @@ class YoutubePage extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: 'ホーム'),
+            icon: Icon(Icons.home_outlined),
+            label: 'ホーム',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.explore), label: '探索'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.control_point, size: 32), label: ''),
+            icon: Icon(Icons.control_point, size: 32),
+            label: '',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.slow_motion_video_outlined), label: '登録チャンネル'),
+            icon: Icon(Icons.slow_motion_video_outlined),
+            label: '登録チャンネル',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.slideshow), label: 'ライブラリ'),
         ],
         selectedLabelStyle: const TextStyle(fontSize: 10),
         unselectedLabelStyle: const TextStyle(fontSize: 10),
-        currentIndex: 0,
         backgroundColor: Colors.grey[900],
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
@@ -56,12 +61,12 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.grey[900],
       leading: Row(
         children: [
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Image.asset('images/youtubeicon.png', width: 30),
-          SizedBox(width: 5),
-          Text(
+          const SizedBox(width: 5),
+          const Text(
             'YouTube',
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -91,7 +96,7 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
       ],
     );
   }
@@ -107,7 +112,7 @@ class _CategorySection extends StatelessWidget {
       children: [
         Column(
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 _CategoryTile(
@@ -157,14 +162,13 @@ class _CategorySection extends StatelessWidget {
                   icon: Icons.sports,
                   color: Colors.cyan[800],
                 ),
-                _CategoryTile(
+                const _CategoryTile(
                   label: '',
-                  icon: null,
                   color: Colors.black,
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ],
@@ -195,14 +199,13 @@ class _CategoryTile extends StatelessWidget {
         width: screenWidth * 0.45,
         height: 50,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Icon(icon, color: Colors.white),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               label,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ],
         ),
@@ -214,8 +217,8 @@ class _CategoryTile extends StatelessWidget {
 class _VideoSection extends StatelessWidget {
   const _VideoSection();
 
-  final String arashiyoutube = 'images/arashiyoutube.png';
-  final String arashiicon = 'images/arashiicon.png';
+  String get arashiyoutube => 'images/arashiyoutube.png';
+  String get arashiicon => 'images/arashiicon.png';
 
   @override
   Widget build(BuildContext context) {
@@ -223,10 +226,10 @@ class _VideoSection extends StatelessWidget {
       color: Colors.grey[900],
       child: Column(
         children: [
-          Row(
+          const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: EdgeInsets.all(15),
                 child: Text(
                   '急上昇動画',
                   style: TextStyle(
@@ -238,13 +241,13 @@ class _VideoSection extends StatelessWidget {
             ],
           ),
           Image.asset(arashiyoutube),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   SizedBox(
                     width: 35,
                     child: ClipRRect(
@@ -252,8 +255,8 @@ class _VideoSection extends StatelessWidget {
                       child: Image.asset(arashiicon),
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Column(
+                  const SizedBox(width: 10),
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -267,8 +270,8 @@ class _VideoSection extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(width: 10),
-              Column(
+              const SizedBox(width: 10),
+              const Column(
                 children: [
                   Icon(Icons.more_vert, color: Colors.white),
                   SizedBox(height: 14),
@@ -278,7 +281,7 @@ class _VideoSection extends StatelessWidget {
           ),
           Row(
             children: [
-              SizedBox(width: 54),
+              const SizedBox(width: 54),
               Text(
                 'ARASHI・127万 回視聴・1日前',
                 style: TextStyle(
@@ -288,15 +291,15 @@ class _VideoSection extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Image.asset(arashiyoutube),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   SizedBox(
                     width: 35,
                     child: ClipRRect(
@@ -304,8 +307,8 @@ class _VideoSection extends StatelessWidget {
                       child: Image.asset(arashiicon),
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Column(
+                  const SizedBox(width: 10),
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -319,8 +322,8 @@ class _VideoSection extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(width: 10),
-              Column(
+              const SizedBox(width: 10),
+              const Column(
                 children: [
                   Icon(Icons.more_vert, color: Colors.white),
                   SizedBox(height: 14),
@@ -330,7 +333,7 @@ class _VideoSection extends StatelessWidget {
           ),
           Row(
             children: [
-              SizedBox(width: 54),
+              const SizedBox(width: 54),
               Text(
                 'ARASHI・127万 回視聴・1日前',
                 style: TextStyle(
@@ -340,7 +343,7 @@ class _VideoSection extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );
