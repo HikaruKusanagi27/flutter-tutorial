@@ -192,10 +192,152 @@ class _CategorySection extends StatelessWidget {
   }
 }
 
-class _ExhibitionSection extends StatelessWidget {
-  const _ExhibitionSection();
+class _ListingList extends StatelessWidget {
+  final ListingInfo data;
+  const _ListingList(this.data);
 
-  final String cameraImage = 'images/camera.png';
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                SizedBox(width: 10),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    data.imagePath,
+                    height: 60,
+                    width: 60,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Row(
+                  children: [
+                    SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          data.productName,
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                        Text(
+                          data.amount,
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.local_fire_department,
+                              color: Colors.blue,
+                              size: 15,
+                            ),
+                            Text(
+                              data.numberOfViews,
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 110,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepOrange[600],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text(
+                      '出品する',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+              ],
+            ),
+          ],
+        ),
+        Divider(
+          thickness: 0.1,
+          color: Colors.grey[300],
+        ),
+      ],
+    );
+  }
+}
+
+class ListingInfo {
+  final String imagePath;
+  final String productName;
+  final String amount;
+  final String numberOfViews;
+
+  ListingInfo({
+    required this.imagePath,
+    required this.productName,
+    required this.amount,
+    required this.numberOfViews,
+  });
+}
+
+class _ExhibitionSection extends StatelessWidget {
+  _ExhibitionSection();
+
+  final List<ListingInfo> _data = [
+    ListingInfo(
+      imagePath: 'images/camera.png',
+      productName: 'sony a7iii',
+      amount: '¥5555.0',
+      numberOfViews: '800人が探しています',
+    ),
+    ListingInfo(
+      imagePath: 'images/camera.png',
+      productName: 'sony a7iii',
+      amount: '¥5555.0',
+      numberOfViews: '800人が探しています',
+    ),
+    ListingInfo(
+      imagePath: 'images/camera.png',
+      productName: 'sony a7iii',
+      amount: '¥5555.0',
+      numberOfViews: '800人が探しています',
+    ),
+    ListingInfo(
+      imagePath: 'images/camera.png',
+      productName: 'sony a7iii',
+      amount: '¥5555.0',
+      numberOfViews: '800人が探しています',
+    ),
+    ListingInfo(
+      imagePath: 'images/camera.png',
+      productName: 'sony a7iii',
+      amount: '¥5555.0',
+      numberOfViews: '800人が探しています',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -251,490 +393,14 @@ class _ExhibitionSection extends StatelessWidget {
             thickness: 0.5,
             color: Colors.grey[300],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      cameraImage,
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'sony a7iii',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Text(
-                            '¥5555.0',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.local_fire_department,
-                                color: Colors.blue,
-                                size: 15,
-                              ),
-                              Text(
-                                '800人が探しています',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 110,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrange[600],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        '出品する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      cameraImage,
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'sony a7iii',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Text(
-                            '¥5555.0',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.local_fire_department,
-                                color: Colors.blue,
-                                size: 15,
-                              ),
-                              Text(
-                                '800人が探しています',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 110,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrange[600],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        '出品する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      cameraImage,
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'sony a7iii',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Text(
-                            '¥5555.0',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.local_fire_department,
-                                color: Colors.blue,
-                                size: 15,
-                              ),
-                              Text(
-                                '800人が探しています',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 110,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrange[600],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        '出品する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      cameraImage,
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'sony a7iii',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Text(
-                            '¥5555.0',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.local_fire_department,
-                                color: Colors.blue,
-                                size: 15,
-                              ),
-                              Text(
-                                '800人が探しています',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 110,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrange[600],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        '出品する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      cameraImage,
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'sony a7iii',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Text(
-                            '¥5555.0',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.local_fire_department,
-                                color: Colors.blue,
-                                size: 15,
-                              ),
-                              Text(
-                                '800人が探しています',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 110,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrange[600],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        '出品する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(width: 10),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      cameraImage,
-                      height: 60,
-                      width: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'sony a7iii',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Text(
-                            '¥5555.0',
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.local_fire_department,
-                                color: Colors.blue,
-                                size: 15,
-                              ),
-                              Text(
-                                '800人が探しています',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 110,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepOrange[600],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        '出品する',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                ],
-              ),
-            ],
+          ListView.builder(
+            itemCount: _data.length,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              final data = _data[index];
+              return _ListingList(data);
+            },
           ),
         ],
       ),
