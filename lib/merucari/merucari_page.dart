@@ -7,12 +7,12 @@ class MerucariPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String appTitle = '出品';
+    const appTitle = '出品';
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: Center(
+        title: const Center(
           child: Text(
             appTitle,
             style: TextStyle(
@@ -27,24 +27,24 @@ class MerucariPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _CategorySection(),
+              const _CategorySection(),
               _ExhibitionSection(),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         onPressed: () {},
         backgroundColor: Colors.deepOrange[600],
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.camera_alt_outlined, size: 24, color: Colors.white),
           ],
         ),
       ),
-      bottomNavigationBar: BottomBarWidget(),
+      bottomNavigationBar: const BottomBarWidget(),
     );
   }
 }
@@ -52,7 +52,7 @@ class MerucariPage extends StatelessWidget {
 class _CategorySection extends StatelessWidget {
   const _CategorySection();
 
-  final String howToStartSellingImage = 'images/how_to_start_selling.png';
+  String get howToStartSellingImage => 'images/how_to_start_selling.png';
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +60,14 @@ class _CategorySection extends StatelessWidget {
     final cardWidth = (screenWidth - 10 * 5) / 4;
 
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           Image.asset(
             howToStartSellingImage,
           ),
-          SizedBox(height: 20),
-          Row(
+          const SizedBox(height: 20),
+          const Row(
             children: [
               Text(
                 '出品へのショートカット',
@@ -78,7 +78,7 @@ class _CategorySection extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -89,7 +89,7 @@ class _CategorySection extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(height: 5),
@@ -98,7 +98,7 @@ class _CategorySection extends StatelessWidget {
                       size: 30,
                     ),
                     SizedBox(height: 5),
-                    const Text(
+                    Text(
                       '写真を撮る',
                       style: TextStyle(
                         fontSize: 10,
@@ -115,7 +115,7 @@ class _CategorySection extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(height: 5),
@@ -124,7 +124,7 @@ class _CategorySection extends StatelessWidget {
                       size: 30,
                     ),
                     SizedBox(height: 5),
-                    const Text(
+                    Text(
                       'アルバム',
                       style: TextStyle(
                         fontSize: 10,
@@ -141,7 +141,7 @@ class _CategorySection extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(height: 5),
@@ -150,7 +150,7 @@ class _CategorySection extends StatelessWidget {
                       size: 30,
                     ),
                     SizedBox(height: 5),
-                    const Text(
+                    Text(
                       'バーコード\n(本・コスメ)',
                       style: TextStyle(
                         fontSize: 10,
@@ -167,7 +167,7 @@ class _CategorySection extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
@@ -175,7 +175,7 @@ class _CategorySection extends StatelessWidget {
                       size: 30,
                     ),
                     SizedBox(height: 5),
-                    const Text(
+                    Text(
                       '下書き一覧',
                       style: TextStyle(
                         fontSize: 10,
@@ -193,8 +193,8 @@ class _CategorySection extends StatelessWidget {
 }
 
 class _ListingList extends StatelessWidget {
-  final ListingInfo data;
   const _ListingList(this.data);
+  final ListingInfo data;
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +205,7 @@ class _ListingList extends StatelessWidget {
           children: [
             Row(
               children: [
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
@@ -217,32 +217,32 @@ class _ListingList extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           data.productName,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                           ),
                         ),
                         Text(
                           data.amount,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12,
                           ),
                         ),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.local_fire_department,
                               color: Colors.blue,
                               size: 15,
                             ),
                             Text(
                               data.numberOfViews,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 12,
                               ),
                             ),
@@ -266,7 +266,7 @@ class _ListingList extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       '出品する',
                       style: TextStyle(
                         color: Colors.white,
@@ -275,7 +275,7 @@ class _ListingList extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
               ],
             ),
           ],
@@ -290,17 +290,16 @@ class _ListingList extends StatelessWidget {
 }
 
 class ListingInfo {
-  final String imagePath;
-  final String productName;
-  final String amount;
-  final String numberOfViews;
-
   ListingInfo({
     required this.imagePath,
     required this.productName,
     required this.amount,
     required this.numberOfViews,
   });
+  final String imagePath;
+  final String productName;
+  final String amount;
+  final String numberOfViews;
 }
 
 class _ExhibitionSection extends StatelessWidget {
@@ -341,15 +340,15 @@ class _ExhibitionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ColoredBox(
       color: Colors.white,
       child: Column(
         children: [
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
+              const Row(
                 children: [
                   SizedBox(width: 10),
                   Column(
@@ -396,7 +395,7 @@ class _ExhibitionSection extends StatelessWidget {
           ListView.builder(
             itemCount: _data.length,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               final data = _data[index];
               return _ListingList(data);
@@ -422,7 +421,7 @@ class BottomBarWidget extends StatelessWidget {
           icon: Stack(
             clipBehavior: Clip.none,
             children: [
-              Icon(
+              const Icon(
                 Icons.home_filled,
                 color: Colors.blue,
               ),
@@ -430,16 +429,16 @@ class BottomBarWidget extends StatelessWidget {
                 top: -6,
                 right: -6,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.red,
                     shape: BoxShape.circle,
                   ),
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     minHeight: 15,
                     minWidth: 15,
                   ),
                   alignment: Alignment.center,
-                  child: Text(
+                  child: const Text(
                     '5',
                     style: TextStyle(
                       color: Colors.white,
@@ -453,20 +452,22 @@ class BottomBarWidget extends StatelessWidget {
           ),
           label: 'ホーム',
         ),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none_outlined), label: 'お知らせ'),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.notifications_none_outlined),
+          label: 'お知らせ',
+        ),
+        const BottomNavigationBarItem(
           icon: Icon(Icons.camera_alt_outlined, color: Colors.grey),
           label: '出品',
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(
             Icons.add_comment_outlined,
             color: Colors.grey,
           ),
           label: 'メッセージ',
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.account_circle),
           label: 'マイページ',
         ),
@@ -477,7 +478,6 @@ class BottomBarWidget extends StatelessWidget {
       unselectedLabelStyle: const TextStyle(
         fontSize: 10,
       ),
-      currentIndex: 0,
       backgroundColor: Colors.white,
       selectedItemColor: Colors.blue,
       unselectedItemColor: Colors.grey,
