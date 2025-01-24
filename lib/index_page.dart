@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/animation/animation_page.dart';
 import 'package:test/building/building_layout_page.dart';
+import 'package:test/residence/residence_page.dart';
 import 'package:test/merucari/merucari_page.dart';
 import 'package:test/youtube/youtube_page.dart';
 
@@ -39,6 +40,14 @@ class IndexPage extends StatelessWidget {
                   );
                 },
                 child: Text('2.1 YouTube')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ResidencePage()),
+                  );
+                },
+                child: Text('2.2 Residence')),
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(

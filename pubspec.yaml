@@ -64,6 +64,8 @@ flutter:
     - images/googleaicon.png
     - images/arashiyoutube.png
     - images/arashiicon.png
+    - images/home.png
+    - images/madori.png
     - images/how_to_start_selling.png
     - images/camera.png
   # An image asset can refer to one or more resolution-specific "variants", see
