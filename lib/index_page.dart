@@ -15,38 +15,49 @@ class IndexPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BuildingLayoutPage()),
-                  );
-                },
-                child: Text('Tutorial1')),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<BuildingLayoutPage>(
+                    builder: (context) => const BuildingLayoutPage(),
+                  ),
+                );
+              },
+              child: const Text('Tutorial1'),
+            ),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AnimationPage()),
-                  );
-                },
-                child: Text('Tutorial1-1')),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<AnimationPage>(
+                    builder: (context) => const AnimationPage(),
+                  ),
+                );
+              },
+              child: const Text('Tutorial1-1'),
+            ),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => YoutubePage()),
-                  );
-                },
-                child: Text('2.1 YouTube')),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<YoutubePage>(
+                    builder: (context) => const YoutubePage(),
+                  ),
+                );
+              },
+              child: const Text('2.1 YouTube'),
+            ),
             ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MerucariPage()),
-                  );
-                },
-                child: Text('2.3 mercari')),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<MerucariPage>(
+                    builder: (context) => const MerucariPage(),
+                  ),
+                );
+              },
+              child: const Text('2.3 mercari'),
+            ),
           ],
         ),
       ),
