@@ -340,15 +340,15 @@ class _ExhibitionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
+    return Container(
       color: Colors.white,
       child: Column(
         children: [
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
+              Row(
                 children: [
                   SizedBox(width: 10),
                   Column(
