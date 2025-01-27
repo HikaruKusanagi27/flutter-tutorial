@@ -5,14 +5,14 @@ class BuildingLayoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String appTitle = 'Flutter layout demo';
+    const appTitle = 'Flutter layout demo';
     return MaterialApp(
       title: appTitle,
       home: Scaffold(
         appBar: AppBar(
-          title: Center(child: const Text(appTitle)),
+          title: const Center(child: Text(appTitle)),
         ),
-        body: SingleChildScrollView(
+        body: const SingleChildScrollView(
           child: Column(
             children: [
               ImageSection(
@@ -94,7 +94,7 @@ class ButtonSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Theme.of(context).primaryColor;
+    final color = Theme.of(context).primaryColor;
     return SizedBox(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -222,9 +222,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.all(0),
+          padding: EdgeInsets.zero,
           child: IconButton(
-            padding: const EdgeInsets.all(0),
+            padding: EdgeInsets.zero,
             alignment: Alignment.center,
             icon: (_isFavorited
                 ? const Icon(Icons.star)
