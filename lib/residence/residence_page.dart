@@ -13,7 +13,8 @@ class ResidencePage extends StatelessWidget {
         child: Column(
           children: [
             _RecommendedPropertiesCard(),
-            _PropertySection(),
+            _PropertyCard(),
+            _PropertyCard(),
           ],
         ),
       ),
@@ -240,9 +241,11 @@ class _RecommendedPropertiesCard extends StatelessWidget {
   }
 }
 
-class _PropertyList extends StatelessWidget {
-  final PropertyInfo data;
-  const _PropertyList(this.data);
+class _PropertyCard extends StatelessWidget {
+  const _PropertyCard();
+
+  final String homeImage = 'images/home.png';
+  final String madoriImage = 'images/madori.png';
 
   @override
   Widget build(BuildContext context) {
@@ -259,14 +262,14 @@ class _PropertyList extends StatelessWidget {
                     height: imageSize,
                     width: imageSize,
                     child: Image.asset(
-                      data.imagePath,
+                      homeImage,
                     ),
                   ),
                   SizedBox(
                     height: imageSize,
                     width: imageSize,
                     child: Image.asset(
-                      data.madoriPath,
+                      madoriImage,
                     ),
                   ),
                 ],
@@ -281,7 +284,7 @@ class _PropertyList extends StatelessWidget {
                   children: [
                     SizedBox(width: 10),
                     Text(
-                      data.title,
+                      'Rising place 川崎',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -294,7 +297,7 @@ class _PropertyList extends StatelessWidget {
                   children: [
                     SizedBox(width: 10),
                     Text(
-                      data.subTitle,
+                      '2,000万円',
                       style: TextStyle(
                         color: Colors.red,
                         fontSize: 20,
@@ -312,7 +315,7 @@ class _PropertyList extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      data.stationName,
+                      '京急本線 京急川崎駅 より 徒歩9分',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -329,7 +332,7 @@ class _PropertyList extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      data.amount,
+                      '1K / 21.24m² 南西向き',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -346,7 +349,7 @@ class _PropertyList extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      data.floor,
+                      '2階/15階建 築5年',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -356,11 +359,11 @@ class _PropertyList extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       padding: const EdgeInsets.all(5),
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: 160,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey, width: 2.0),
                         borderRadius: BorderRadius.circular(4),
@@ -380,9 +383,10 @@ class _PropertyList extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(width: 10),
                     Container(
                       padding: const EdgeInsets.all(5),
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: 160,
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey, width: 2.0),
                         borderRadius: BorderRadius.circular(4),
@@ -407,69 +411,9 @@ class _PropertyList extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(height: 10),
         ],
       ),
-    );
-  }
-}
-
-class PropertyInfo {
-  final String imagePath;
-  final String madoriPath;
-  final String title;
-  final String subTitle;
-  final String stationName;
-  final String amount;
-  final String floor;
-
-  PropertyInfo({
-    required this.imagePath,
-    required this.madoriPath,
-    required this.title,
-    required this.subTitle,
-    required this.stationName,
-    required this.amount,
-    required this.floor,
-  });
-}
-
-class _PropertySection extends StatelessWidget {
-  _PropertySection();
-
-  final String homeImage = 'images/home.png';
-  final String madoriImage = 'images/madori.png';
-
-  final List<PropertyInfo> _data = [
-    PropertyInfo(
-      imagePath: 'images/home.png',
-      madoriPath: 'images/madori.png',
-      title: 'Rising place 川崎',
-      subTitle: '2,000万円',
-      stationName: '京急本線 京急川崎駅 より 徒歩9分',
-      amount: '1K / 21.24m² 南西向き',
-      floor: '2階/15階建 築5年',
-    ),
-    PropertyInfo(
-      imagePath: 'images/home.png',
-      madoriPath: 'images/madori.png',
-      title: 'Rising place 川崎',
-      subTitle: '2,000万円',
-      stationName: '2,京急本線 京急川崎駅 より 徒歩9分',
-      amount: '1K / 21.24m² 南西向き',
-      floor: '2階/15階建 築5年',
-    ),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _data.length,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        final data = _data[index];
-        return _PropertyList(data);
-      },
     );
   }
 }
