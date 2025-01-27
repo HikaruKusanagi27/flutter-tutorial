@@ -250,21 +250,28 @@ class _PropertyList extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.2,
-                child: Image.asset(
-                  data.imagePath,
-                ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.2,
-                child: Image.asset(data.madoriPath),
-              ),
-              SizedBox(),
-            ],
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final imageSize = constraints.maxWidth * 0.5;
+              return Row(
+                children: [
+                  SizedBox(
+                    height: imageSize,
+                    width: imageSize,
+                    child: Image.asset(
+                      data.imagePath,
+                    ),
+                  ),
+                  SizedBox(
+                    height: imageSize,
+                    width: imageSize,
+                    child: Image.asset(
+                      data.madoriPath,
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
