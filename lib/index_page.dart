@@ -53,7 +53,8 @@ class IndexPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute<ResidencePage>(
-                      builder: (context) => const ResidencePage()),
+                    builder: (context) => const ResidencePage(),
+                  ),
                 );
               },
               child: const Text('2.2 Residence'),
