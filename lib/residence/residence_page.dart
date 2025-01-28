@@ -8,8 +8,8 @@ class ResidencePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _AppBarWidget(),
-      body: SingleChildScrollView(
+      appBar: const _AppBarWidget(),
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             _RecommendedPropertiesCard(),
@@ -19,10 +19,10 @@ class ResidencePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
+        shape: const CircleBorder(),
         onPressed: () {},
         backgroundColor: Colors.teal,
-        child: Column(
+        child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.search, size: 24, color: Colors.white),
@@ -38,7 +38,7 @@ class ResidencePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBarWidget(),
+      bottomNavigationBar: const BottomBarWidget(),
     );
   }
 }
@@ -53,7 +53,8 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       leading: IconButton(
-        icon: Icon(Icons.keyboard_arrow_left, color: Colors.teal, size: 32),
+        icon:
+            const Icon(Icons.keyboard_arrow_left, color: Colors.teal, size: 32),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -74,7 +75,7 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Stack(
             children: [
               ElevatedButton(
@@ -94,16 +95,16 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               Positioned(
                 right: 0,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.red,
                     shape: BoxShape.circle,
                   ),
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     minHeight: 12,
                     minWidth: 12,
                   ),
                   alignment: Alignment.center,
-                  child: Text(
+                  child: const Text(
                     '1',
                     style: TextStyle(
                       color: Colors.white,
@@ -114,15 +115,15 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.add_circle, color: Colors.teal, size: 32),
+          icon: const Icon(Icons.add_circle, color: Colors.teal, size: 32),
           onPressed: () {},
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
       ],
     );
   }
@@ -139,8 +140,8 @@ class _RecommendedPropertiesCard extends StatelessWidget {
           color: Colors.white,
           child: Column(
             children: [
-              SizedBox(height: 10),
-              Row(
+              const SizedBox(height: 10),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
@@ -180,14 +181,14 @@ class _RecommendedPropertiesCard extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8),
                 child: Container(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Column(
+                  child: const Column(
                     children: [
                       SizedBox(height: 5),
                       Row(
@@ -197,7 +198,7 @@ class _RecommendedPropertiesCard extends StatelessWidget {
                             Icons.train,
                           ),
                           SizedBox(width: 5),
-                          const Text(
+                          Text(
                             '東京駅・品川駅・川崎駅・横浜駅・目黒駅',
                           ),
                         ],
@@ -210,7 +211,7 @@ class _RecommendedPropertiesCard extends StatelessWidget {
                             Icons.monetization_on,
                           ),
                           SizedBox(width: 5),
-                          const Text(
+                          Text(
                             '下限なし〜2,000万円',
                           ),
                         ],
@@ -223,7 +224,7 @@ class _RecommendedPropertiesCard extends StatelessWidget {
                             Icons.info_outline,
                           ),
                           SizedBox(width: 5),
-                          const Text(
+                          Text(
                             '1R〜4LDK / 10m²以上 / 徒歩20分',
                           ),
                         ],
@@ -232,7 +233,7 @@ class _RecommendedPropertiesCard extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
             ],
           ),
         ),
@@ -244,8 +245,8 @@ class _RecommendedPropertiesCard extends StatelessWidget {
 class _PropertyCard extends StatelessWidget {
   const _PropertyCard();
 
-  final String homeImage = 'images/home.png';
-  final String madoriImage = 'images/madori.png';
+  String get homeImage => 'images/home.png';
+  String get madoriImage => 'images/madori.png';
 
   @override
   Widget build(BuildContext context) {
@@ -277,10 +278,10 @@ class _PropertyCard extends StatelessWidget {
             },
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: Column(
               children: [
-                Row(
+                const Row(
                   children: [
                     SizedBox(width: 10),
                     Text(
@@ -293,7 +294,7 @@ class _PropertyCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
+                const Row(
                   children: [
                     SizedBox(width: 10),
                     Text(
@@ -306,8 +307,8 @@ class _PropertyCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 5),
-                Row(
+                const SizedBox(height: 5),
+                const Row(
                   children: [
                     SizedBox(width: 5),
                     Icon(
@@ -323,8 +324,8 @@ class _PropertyCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 5),
-                Row(
+                const SizedBox(height: 5),
+                const Row(
                   children: [
                     SizedBox(width: 5),
                     Icon(
@@ -340,8 +341,8 @@ class _PropertyCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 5),
-                Row(
+                const SizedBox(height: 5),
+                const Row(
                   children: [
                     SizedBox(width: 5),
                     Icon(
@@ -357,7 +358,7 @@ class _PropertyCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -365,15 +366,15 @@ class _PropertyCard extends StatelessWidget {
                       padding: const EdgeInsets.all(5),
                       width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 2.0),
+                        border: Border.all(color: Colors.grey, width: 2),
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.delete_outline, color: Colors.grey),
                           SizedBox(width: 10),
-                          const Text(
+                          Text(
                             '興味なし',
                             style: TextStyle(
                               color: Colors.grey,
@@ -387,15 +388,15 @@ class _PropertyCard extends StatelessWidget {
                       padding: const EdgeInsets.all(5),
                       width: MediaQuery.of(context).size.width * 0.4,
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 2.0),
+                        border: Border.all(color: Colors.grey, width: 2),
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.favorite_border, color: Colors.grey),
                           SizedBox(width: 10),
-                          const Text(
+                          Text(
                             'お気に入り',
                             style: TextStyle(
                               color: Colors.grey,
@@ -410,7 +411,7 @@ class _PropertyCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );
@@ -427,8 +428,8 @@ class BottomBarWidget extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+        const BottomNavigationBarItem(
           icon: Icon(Icons.favorite_border),
           label: 'お気に入り',
         ),
@@ -436,7 +437,7 @@ class BottomBarWidget extends StatelessWidget {
           icon: Stack(
             clipBehavior: Clip.none,
             children: [
-              Icon(
+              const Icon(
                 Icons.message,
                 color: Colors.grey,
               ),
@@ -444,16 +445,16 @@ class BottomBarWidget extends StatelessWidget {
                 top: -4,
                 right: -4,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.red,
                     shape: BoxShape.circle,
                   ),
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     minHeight: 12,
                     minWidth: 12,
                   ),
                   alignment: Alignment.center,
-                  child: Text(
+                  child: const Text(
                     '1',
                     style: TextStyle(
                       color: Colors.white,
@@ -467,7 +468,7 @@ class BottomBarWidget extends StatelessWidget {
           ),
           label: 'メッセージ',
         ),
-        BottomNavigationBarItem(
+        const BottomNavigationBarItem(
           icon: Icon(Icons.person_outline),
           label: 'マイページ',
         ),
@@ -478,7 +479,6 @@ class BottomBarWidget extends StatelessWidget {
       unselectedLabelStyle: const TextStyle(
         fontSize: 10,
       ),
-      currentIndex: 0,
       backgroundColor: Colors.white,
       selectedItemColor: Colors.teal,
       unselectedItemColor: Colors.grey,
