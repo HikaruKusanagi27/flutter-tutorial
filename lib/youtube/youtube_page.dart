@@ -9,11 +9,11 @@ class YoutubePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: _AppBarWidget(),
+      appBar: const _AppBarWidget(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _CategorySection(),
+            const _CategorySection(),
             _VideoSection(),
           ],
         ),
@@ -22,17 +22,22 @@ class YoutubePage extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: 'ホーム'),
+            icon: Icon(Icons.home_outlined),
+            label: 'ホーム',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.explore), label: '探索'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.control_point, size: 32), label: ''),
+            icon: Icon(Icons.control_point, size: 32),
+            label: '',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.slow_motion_video_outlined), label: '登録チャンネル'),
+            icon: Icon(Icons.slow_motion_video_outlined),
+            label: '登録チャンネル',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.slideshow), label: 'ライブラリ'),
         ],
         selectedLabelStyle: const TextStyle(fontSize: 10),
         unselectedLabelStyle: const TextStyle(fontSize: 10),
-        currentIndex: 0,
         backgroundColor: Colors.grey[900],
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
@@ -56,12 +61,12 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.grey[900],
       leading: Row(
         children: [
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Image.asset('images/youtubeicon.png', width: 30),
-          SizedBox(width: 5),
-          Text(
+          const SizedBox(width: 5),
+          const Text(
             'YouTube',
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -91,7 +96,7 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
       ],
     );
   }
@@ -107,7 +112,7 @@ class _CategorySection extends StatelessWidget {
       children: [
         Column(
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 _CategoryTile(
@@ -157,14 +162,13 @@ class _CategorySection extends StatelessWidget {
                   icon: Icons.sports,
                   color: Colors.cyan[800],
                 ),
-                _CategoryTile(
+                const _CategoryTile(
                   label: '',
-                  icon: null,
                   color: Colors.black,
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ],
@@ -195,14 +199,13 @@ class _CategoryTile extends StatelessWidget {
         width: screenWidth * 0.45,
         height: 50,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Icon(icon, color: Colors.white),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               label,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ],
         ),
@@ -212,8 +215,8 @@ class _CategoryTile extends StatelessWidget {
 }
 
 class _VideoList extends StatelessWidget {
-  final MovieInfo data;
   const _VideoList(this.data);
+  final MovieInfo data;
 
   @override
   Widget build(BuildContext context) {
@@ -222,13 +225,13 @@ class _VideoList extends StatelessWidget {
       child: Column(
         children: [
           Image.asset(data.imagePath),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   SizedBox(
                     width: 35,
                     child: ClipRRect(
@@ -236,13 +239,13 @@ class _VideoList extends StatelessWidget {
                       child: Image.asset(data.iconPath),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         data.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                         ),
@@ -251,8 +254,8 @@ class _VideoList extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(width: 10),
-              Column(
+              const SizedBox(width: 10),
+              const Column(
                 children: [
                   Icon(Icons.more_vert, color: Colors.white),
                   SizedBox(height: 14),
@@ -262,7 +265,7 @@ class _VideoList extends StatelessWidget {
           ),
           Row(
             children: [
-              SizedBox(width: 54),
+              const SizedBox(width: 54),
               Text(
                 data.subTitle,
                 style: TextStyle(
@@ -272,7 +275,7 @@ class _VideoList extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );
@@ -281,17 +284,16 @@ class _VideoList extends StatelessWidget {
 
 // 1. クラスを作成
 class MovieInfo {
-  final String imagePath; // サムネイル画像のパス
-  final String iconPath; // アイコン画像のパス
-  final String title; // 動画タイトル
-  final String subTitle; // サブタイトル
-
   MovieInfo({
     required this.imagePath,
     required this.iconPath,
     required this.title,
     required this.subTitle,
   });
+  final String imagePath; // サムネイル画像のパス
+  final String iconPath; // アイコン画像のパス
+  final String title; // 動画タイトル
+  final String subTitle; // サブタイトル
 }
 
 // 2. ダミーデータの作成
@@ -319,10 +321,10 @@ class _VideoSection extends StatelessWidget {
       children: [
         Container(
           color: Colors.grey[900],
-          child: Row(
+          child: const Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: EdgeInsets.all(15),
                 child: Text(
                   '急上昇動画',
                   style: TextStyle(
@@ -337,7 +339,7 @@ class _VideoSection extends StatelessWidget {
         ListView.builder(
           itemCount: _dummyMovieData.length,
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             final data = _dummyMovieData[index];
             return _VideoList(data);
