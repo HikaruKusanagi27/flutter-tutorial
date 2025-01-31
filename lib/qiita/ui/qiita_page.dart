@@ -11,13 +11,13 @@ class QiitaPage extends ConsumerWidget {
     final state = ref.watch(qiitaViewModelProvider);
     final notifier = ref.read(qiitaViewModelProvider.notifier);
 
-    return WillPopScope(
-      onWillPop: state.isReadyData
-          ? () {
-              notifier.onBackHome();
-              return Future.value(false);
-            }
-          : null,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) {
+          notifier.onBackHome();
+        }
+      },
       child: Scaffold(
         body: Stack(
           children: [
