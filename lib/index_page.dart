@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/animation/animation_page.dart';
+import 'package:test/async/async_page.dart';
 import 'package:test/building/building_layout_page.dart';
 import 'package:test/residence/residence_page.dart';
 import 'package:test/merucari/merucari_page.dart';
@@ -69,6 +70,17 @@ class IndexPage extends StatelessWidget {
                 );
               },
               child: const Text('2.3 mercari'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<AsyncPage>(
+                    builder: (context) => const AsyncPage(),
+                  ),
+                );
+              },
+              child: const Text('Async'),
             ),
           ],
         ),
