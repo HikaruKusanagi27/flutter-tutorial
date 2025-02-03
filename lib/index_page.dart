@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/animation/animation_page.dart';
 import 'package:test/async/async_page.dart';
 import 'package:test/building/building_layout_page.dart';
+import 'package:test/qiita/ui/qiita_page.dart';
 import 'package:test/residence/residence_page.dart';
 import 'package:test/merucari/merucari_page.dart';
 import 'package:test/youtube/youtube_page.dart';
@@ -81,6 +82,17 @@ class IndexPage extends StatelessWidget {
                 );
               },
               child: const Text('Async'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<QiitaPage>(
+                    builder: (context) => const QiitaPage(),
+                  ),
+                );
+              },
+              child: const Text('Tutorial6 MVVM'),
             ),
           ],
         ),
