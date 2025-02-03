@@ -12,7 +12,6 @@ class QiitaPage extends ConsumerWidget {
     final notifier = ref.read(qiitaViewModelProvider.notifier);
 
     return PopScope(
-      canPop: false,
       onPopInvokedWithResult: (didPop, _) {
         if (!didPop) {
           notifier.onBackHome();
