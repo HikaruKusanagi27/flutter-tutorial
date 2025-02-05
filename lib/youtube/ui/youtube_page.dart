@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:test/youtube/ui/youtube_state.dart';
+import 'package:test/youtube/ui/youtube_view_model.dart';
 
-class YoutubePage extends StatelessWidget {
+class YoutubePage extends ConsumerWidget {
   const YoutubePage({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final state = ref.watch(youtubeViewModelProvider);
+    // final notifier = ref.read(youtubeViewModelProvider.notifier);
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: const _AppBarWidget(),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
-            const _CategorySection(),
+            _CategorySection(),
             _VideoSection(),
           ],
         ),
@@ -216,7 +222,7 @@ class _CategoryTile extends StatelessWidget {
 
 class _VideoList extends StatelessWidget {
   const _VideoList(this.data);
-  final MovieInfo data;
+  final YoutubeItem data;
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +230,7 @@ class _VideoList extends StatelessWidget {
       color: Colors.grey[900],
       child: Column(
         children: [
-          Image.asset(data.imagePath),
+          Image.asset(data.imagePath ?? ''),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -236,7 +242,7 @@ class _VideoList extends StatelessWidget {
                     width: 35,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
-                      child: Image.asset(data.iconPath),
+                      child: Image.asset(data.iconPath ?? ''),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -244,7 +250,7 @@ class _VideoList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data.title,
+                        data.title ?? '',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -267,7 +273,7 @@ class _VideoList extends StatelessWidget {
             children: [
               const SizedBox(width: 54),
               Text(
-                data.subTitle,
+                data.subTitle ?? '',
                 style: TextStyle(
                   color: Colors.grey[500],
                   fontSize: 14,
@@ -282,41 +288,15 @@ class _VideoList extends StatelessWidget {
   }
 }
 
-// 1. クラスを作成
-class MovieInfo {
-  MovieInfo({
-    required this.imagePath,
-    required this.iconPath,
-    required this.title,
-    required this.subTitle,
-  });
-  final String imagePath; // サムネイル画像のパス
-  final String iconPath; // アイコン画像のパス
-  final String title; // 動画タイトル
-  final String subTitle; // サブタイトル
-}
-
 // 2. ダミーデータの作成
-class _VideoSection extends StatelessWidget {
-  _VideoSection();
-
-  final List<MovieInfo> _dummyMovieData = [
-    MovieInfo(
-      imagePath: 'images/arashiyoutube.png',
-      iconPath: 'images/arashiicon.png',
-      title: '"This is ARASHI LIVE 2020.12.31" Digest\nMovie',
-      subTitle: 'ARASHI・127万 回視聴・1日前',
-    ),
-    MovieInfo(
-      imagePath: 'images/arashiyoutube.png',
-      iconPath: 'images/arashiicon.png',
-      title: '"This is ARASHI LIVE 2020.12.31" Digest\nMovie',
-      subTitle: 'ARASHI・127万 回視聴・1日前',
-    ),
-  ];
+class _VideoSection extends ConsumerWidget {
+  const _VideoSection();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(youtubeViewModelProvider);
+    final notifier = ref.read(youtubeViewModelProvider.notifier);
+
     return Column(
       children: [
         Container(
@@ -336,15 +316,18 @@ class _VideoSection extends StatelessWidget {
             ],
           ),
         ),
-        ListView.builder(
-          itemCount: _dummyMovieData.length,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            final data = _dummyMovieData[index];
-            return _VideoList(data);
-          },
-        ),
+        if (state.isLoading)
+          const CircularProgressIndicator()
+        else if (state.isReadyData)
+          ListView.builder(
+            itemCount: state.youtubeItems.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              final data = state.youtubeItems[index];
+              return _VideoList(data);
+            },
+          ),
       ],
     );
   }
