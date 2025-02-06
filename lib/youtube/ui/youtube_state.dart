@@ -14,22 +14,14 @@ class YoutubeState with _$YoutubeState {
 @freezed
 class YoutubeItem with _$YoutubeItem {
   const factory YoutubeItem({
-    @JsonKey(name: 'imagePath') String? imagePath,
-    @JsonKey(name: 'iconPath') String? iconPath,
-    @JsonKey(name: 'title') String? title,
-    @JsonKey(name: 'subTitle') String? subTitle,
+    @JsonKey(name: 'imagePath') required String imagePath,
+    @JsonKey(name: 'iconPath') required String iconPath,
+    @JsonKey(name: 'title') required String title,
+    @JsonKey(name: 'channelName') required String channelName,
+    @JsonKey(name: 'numOfViews') required int numOfViews,
+    @JsonKey(name: 'daysAgo') required int daysAgo,
   }) = _YoutubeItem;
 
   factory YoutubeItem.fromJson(Map<String, dynamic> json) =>
       _$YoutubeItemFromJson(json);
 }
-
-// @freezed
-// class YoutubeUser with _$YoutubeUser {
-//   const factory YoutubeUser({
-//     @JsonKey(name: 'profile_image_url') String? profileImageUrl,
-//   }) = _YoutubeUser;
-
-//   factory YoutubeUser.fromJson(Map<String, dynamic> json) =>
-//       _$YoutubeUserFromJson(json);
-// }

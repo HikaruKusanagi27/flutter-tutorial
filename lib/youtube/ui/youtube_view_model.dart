@@ -11,10 +11,12 @@ class YoutubeViewModel extends _$YoutubeViewModel {
 
   @override
   YoutubeState build() {
-    return const YoutubeState();
+    state = const YoutubeState(); // 初期化メソッド
+    fetchYoutubeItems();
+    return state;
   }
 
-  Future<void> fetchYotubeItems() async {
+  Future<void> fetchYoutubeItems() async {
     state = state.copyWith(isLoading: true);
 
     final youtubeItems = await _youtubeRepository.fetchYoutubeItems();

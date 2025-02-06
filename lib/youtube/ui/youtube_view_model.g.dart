@@ -6,7 +6,7 @@ part of 'youtube_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$youtubeViewModelHash() => r'1b69a858fcb4aad18da2bdeca4429823db24256d';
+String _$youtubeViewModelHash() => r'd97bb3c07f0fc2f26e636277ac93ac5c49315109';
 
 /// See also [YoutubeViewModel].
 @ProviderFor(YoutubeViewModel)

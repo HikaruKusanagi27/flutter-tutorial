@@ -3,16 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/youtube/ui/youtube_state.dart';
 import 'package:test/youtube/ui/youtube_view_model.dart';
 
-class YoutubePage extends ConsumerWidget {
+class YoutubePage extends StatelessWidget {
   const YoutubePage({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // final state = ref.watch(youtubeViewModelProvider);
-    // final notifier = ref.read(youtubeViewModelProvider.notifier);
-
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: const _AppBarWidget(),
@@ -220,8 +217,8 @@ class _CategoryTile extends StatelessWidget {
   }
 }
 
-class _VideoList extends StatelessWidget {
-  const _VideoList(this.data);
+class _VideoScreen extends StatelessWidget {
+  const _VideoScreen(this.data);
   final YoutubeItem data;
 
   @override
@@ -230,8 +227,10 @@ class _VideoList extends StatelessWidget {
       color: Colors.grey[900],
       child: Column(
         children: [
-          Image.asset(data.imagePath ?? ''),
-          const SizedBox(height: 10),
+          // Image.network(
+          //   data.imagePath,
+          // ),
+          Image.asset('images/arashiyoutube.png'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -242,46 +241,60 @@ class _VideoList extends StatelessWidget {
                     width: 35,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
-                      child: Image.asset(data.iconPath ?? ''),
+                      child: Image.network(data.iconPath),
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.title ?? '',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    data.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(width: 10),
-              const Column(
+              const Row(
                 children: [
-                  Icon(Icons.more_vert, color: Colors.white),
-                  SizedBox(height: 14),
+                  Icon(
+                    Icons.more_vert,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 10),
                 ],
               ),
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(width: 54),
-              Text(
-                data.subTitle ?? '',
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: 14,
-                ),
+              Row(
+                children: [
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    width: 35,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    '${data.channelName}・${data.numOfViews}万回視聴'
+                    '・${data.daysAgo}日前',
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
+              const Row(
+                children: [
+                  SizedBox(),
+                ],
               ),
             ],
           ),
-          const SizedBox(height: 10),
         ],
       ),
     );
@@ -289,14 +302,28 @@ class _VideoList extends StatelessWidget {
 }
 
 // 2. ダミーデータの作成
-class _VideoSection extends ConsumerWidget {
+class _VideoSection extends ConsumerStatefulWidget {
+  // できればConsumerStatefulWidgetをつかはない方が良い
   const _VideoSection();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_VideoSection> createState() => _VideoSectionState();
+}
+
+class _VideoSectionState extends ConsumerState<_VideoSection> {
+  @override
+  void initState() {
+    super.initState();
+    // 初期データ取得
+    Future(() {
+      ref.read(youtubeViewModelProvider.notifier).fetchYoutubeItems();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(youtubeViewModelProvider);
     final notifier = ref.read(youtubeViewModelProvider.notifier);
-
     return Column(
       children: [
         Container(
@@ -317,16 +344,29 @@ class _VideoSection extends ConsumerWidget {
           ),
         ),
         if (state.isLoading)
-          const CircularProgressIndicator()
-        else if (state.isReadyData)
+          const Center(
+            child: Column(
+              children: [
+                CircularProgressIndicator(),
+              ],
+            ),
+          )
+        else if (state.isReadyData && state.youtubeItems.isNotEmpty)
           ListView.builder(
             itemCount: state.youtubeItems.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               final data = state.youtubeItems[index];
-              return _VideoList(data);
+              return _VideoScreen(data);
             },
+          )
+        else
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('データを取得できませんでした', style: TextStyle(color: Colors.white)),
+            ],
           ),
       ],
     );

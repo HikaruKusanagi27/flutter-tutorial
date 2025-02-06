@@ -8,10 +8,12 @@ part of 'youtube_state.dart';
 
 _$YoutubeItemImpl _$$YoutubeItemImplFromJson(Map<String, dynamic> json) =>
     _$YoutubeItemImpl(
-      imagePath: json['imagePath'] as String?,
-      iconPath: json['iconPath'] as String?,
-      title: json['title'] as String?,
-      subTitle: json['subTitle'] as String?,
+      imagePath: json['imagePath'] as String,
+      iconPath: json['iconPath'] as String,
+      title: json['title'] as String,
+      channelName: json['channelName'] as String,
+      numOfViews: (json['numOfViews'] as num).toInt(),
+      daysAgo: (json['daysAgo'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$YoutubeItemImplToJson(_$YoutubeItemImpl instance) =>
@@ -19,5 +21,7 @@ Map<String, dynamic> _$$YoutubeItemImplToJson(_$YoutubeItemImpl instance) =>
       'imagePath': instance.imagePath,
       'iconPath': instance.iconPath,
       'title': instance.title,
-      'subTitle': instance.subTitle,
+      'channelName': instance.channelName,
+      'numOfViews': instance.numOfViews,
+      'daysAgo': instance.daysAgo,
     };

@@ -14,8 +14,7 @@ class _YoutubeApiClient implements YoutubeApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??=
-        'https://flutter-tutorial-app-bc98f.web.app/api/v1/youtube_app.json';
+    baseUrl ??= 'https://flutter-tutorial-app-bc98f.web.app/api/v1/';
   }
 
   final Dio _dio;
@@ -37,7 +36,7 @@ class _YoutubeApiClient implements YoutubeApiClient {
     )
         .compose(
           _dio.options,
-          '/tags/{tag}/items',
+          'youtube_app.json',
           queryParameters: queryParameters,
           data: _data,
         )
