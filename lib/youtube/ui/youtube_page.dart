@@ -342,14 +342,9 @@ class _VideoSectionState extends ConsumerState<_VideoSection> {
           ),
         ),
         if (state.isLoading)
-          const Column(
-            children: [
-              SizedBox(height: 200),
-              CircularProgressIndicator(),
-            ],
-          )
+          const Center(child: CircularProgressIndicator())
         else if (state.isReadyData && state.youtubeItems.isNotEmpty)
-          Column(
+          Stack(
             children: [
               ListView.builder(
                 itemCount: state.youtubeItems.length,
@@ -363,14 +358,11 @@ class _VideoSectionState extends ConsumerState<_VideoSection> {
             ],
           )
         else
-          const Column(
-            children: [
-              SizedBox(height: 200),
-              Text(
-                'データを取得できませんでした',
-                style: TextStyle(color: Colors.white),
-              ),
-            ],
+          const Center(
+            child: Text(
+              'データを取得できませんでした',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
       ],
     );
