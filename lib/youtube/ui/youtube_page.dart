@@ -299,28 +299,20 @@ class _VideoScreen extends StatelessWidget {
 }
 
 // 2. ダミーデータの作成
-class _VideoSection extends ConsumerStatefulWidget {
+class _VideoSection extends ConsumerWidget {
   // できればConsumerStatefulWidgetをつかはない方が良い
   const _VideoSection();
 
   @override
-  ConsumerState<_VideoSection> createState() => _VideoSectionState();
-}
-
-class _VideoSectionState extends ConsumerState<_VideoSection> {
-  @override
-  void initState() {
-    super.initState();
-    // 初期データ取得
-    Future(() {
-      ref.read(youtubeViewModelProvider.notifier).fetchYoutubeItems();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(youtubeViewModelProvider);
     final notifier = ref.read(youtubeViewModelProvider.notifier);
+
+    ref.listen(youtubeViewModelProvider, (previous, next) {
+      if (previous == null) {
+        notifier.fetchYoutubeItems();
+      }
+    });
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
