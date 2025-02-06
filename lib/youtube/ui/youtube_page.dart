@@ -227,9 +227,6 @@ class _VideoScreen extends StatelessWidget {
       color: Colors.grey[900],
       child: Column(
         children: [
-          // Image.network(
-          //   data.imagePath,
-          // ),
           Image.asset('images/arashiyoutube.png'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -325,6 +322,7 @@ class _VideoSectionState extends ConsumerState<_VideoSection> {
     final state = ref.watch(youtubeViewModelProvider);
     final notifier = ref.read(youtubeViewModelProvider.notifier);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
           color: Colors.grey[900],
@@ -344,28 +342,34 @@ class _VideoSectionState extends ConsumerState<_VideoSection> {
           ),
         ),
         if (state.isLoading)
-          const Center(
-            child: Column(
-              children: [
-                CircularProgressIndicator(),
-              ],
-            ),
+          const Column(
+            children: [
+              SizedBox(height: 200),
+              CircularProgressIndicator(),
+            ],
           )
         else if (state.isReadyData && state.youtubeItems.isNotEmpty)
-          ListView.builder(
-            itemCount: state.youtubeItems.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              final data = state.youtubeItems[index];
-              return _VideoScreen(data);
-            },
+          Column(
+            children: [
+              ListView.builder(
+                itemCount: state.youtubeItems.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final data = state.youtubeItems[index];
+                  return _VideoScreen(data);
+                },
+              ),
+            ],
           )
         else
           const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('データを取得できませんでした', style: TextStyle(color: Colors.white)),
+              SizedBox(height: 200),
+              Text(
+                'データを取得できませんでした',
+                style: TextStyle(color: Colors.white),
+              ),
             ],
           ),
       ],
