@@ -227,7 +227,10 @@ class _VideoScreen extends StatelessWidget {
       color: Colors.grey[900],
       child: Column(
         children: [
-          Image.asset('images/arashiyoutube.png'),
+          if (data.imagePath.isNotEmpty)
+            Image.network(data.imagePath)
+          else
+            Image.asset('images/arashiyoutube.png'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
