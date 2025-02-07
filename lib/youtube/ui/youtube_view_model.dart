@@ -19,6 +19,9 @@ class YoutubeViewModel extends _$YoutubeViewModel {
   Future<void> fetchYoutubeItems() async {
     state = state.copyWith(isLoading: true);
 
+    await Future<void>.delayed(
+      const Duration(seconds: 1),
+    ); // インディケーターの挙動確認のため実装
     final youtubeItems = await _youtubeRepository.fetchYoutubeItems();
 
     if (youtubeItems.isNotEmpty) {

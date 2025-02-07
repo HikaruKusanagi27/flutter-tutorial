@@ -285,11 +285,6 @@ class _VideoScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const Row(
-                children: [
-                  SizedBox(),
-                ],
-              ),
             ],
           ),
         ],
