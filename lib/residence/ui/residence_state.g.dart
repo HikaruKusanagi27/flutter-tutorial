@@ -9,7 +9,7 @@ part of 'residence_state.dart';
 _$ResidenceItemImpl _$$ResidenceItemImplFromJson(Map<String, dynamic> json) =>
     _$ResidenceItemImpl(
       imagePath: json['imagePath'] as String? ?? '',
-      madoriPathrl: json['madoriPath'] as String? ?? '',
+      madoriPath: json['madoriPath'] as String? ?? '',
       title: json['title'] ?? '',
       subTitle: json['subTitle'] ?? '',
       stationName: json['stationName'] ?? '',
@@ -20,7 +20,7 @@ _$ResidenceItemImpl _$$ResidenceItemImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ResidenceItemImplToJson(_$ResidenceItemImpl instance) =>
     <String, dynamic>{
       'imagePath': instance.imagePath,
-      'madoriPath': instance.madoriPathrl,
+      'madoriPath': instance.madoriPath,
       'title': instance.title,
       'subTitle': instance.subTitle,
       'stationName': instance.stationName,

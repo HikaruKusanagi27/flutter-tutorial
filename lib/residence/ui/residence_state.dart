@@ -17,7 +17,7 @@ class ResidenceState with _$ResidenceState {
 class ResidenceItem with _$ResidenceItem {
   const factory ResidenceItem({
     @JsonKey(name: 'imagePath') @Default('') String imagePath,
-    @JsonKey(name: 'madoriPath') @Default('') String madoriPathrl,
+    @JsonKey(name: 'madoriPath') @Default('') String madoriPath,
     @JsonKey(name: 'title') @Default('') title,
     @JsonKey(name: 'subTitle') @Default('') subTitle,
     @JsonKey(name: 'stationName') @Default('') stationName,

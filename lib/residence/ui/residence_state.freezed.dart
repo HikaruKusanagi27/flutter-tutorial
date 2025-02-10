@@ -205,7 +205,7 @@ mixin _$ResidenceItem {
   @JsonKey(name: 'imagePath')
   String get imagePath => throw _privateConstructorUsedError;
   @JsonKey(name: 'madoriPath')
-  String get madoriPathrl => throw _privateConstructorUsedError;
+  String get madoriPath => throw _privateConstructorUsedError;
   @JsonKey(name: 'title')
   dynamic get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'subTitle')
@@ -235,7 +235,7 @@ abstract class $ResidenceItemCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'imagePath') String imagePath,
-      @JsonKey(name: 'madoriPath') String madoriPathrl,
+      @JsonKey(name: 'madoriPath') String madoriPath,
       @JsonKey(name: 'title') dynamic title,
       @JsonKey(name: 'subTitle') dynamic subTitle,
       @JsonKey(name: 'stationName') dynamic stationName,
@@ -259,7 +259,7 @@ class _$ResidenceItemCopyWithImpl<$Res, $Val extends ResidenceItem>
   @override
   $Res call({
     Object? imagePath = null,
-    Object? madoriPathrl = null,
+    Object? madoriPath = null,
     Object? title = freezed,
     Object? subTitle = freezed,
     Object? stationName = freezed,
@@ -271,9 +271,9 @@ class _$ResidenceItemCopyWithImpl<$Res, $Val extends ResidenceItem>
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String,
-      madoriPathrl: null == madoriPathrl
-          ? _value.madoriPathrl
-          : madoriPathrl // ignore: cast_nullable_to_non_nullable
+      madoriPath: null == madoriPath
+          ? _value.madoriPath
+          : madoriPath // ignore: cast_nullable_to_non_nullable
               as String,
       title: freezed == title
           ? _value.title
@@ -309,7 +309,7 @@ abstract class _$$ResidenceItemImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'imagePath') String imagePath,
-      @JsonKey(name: 'madoriPath') String madoriPathrl,
+      @JsonKey(name: 'madoriPath') String madoriPath,
       @JsonKey(name: 'title') dynamic title,
       @JsonKey(name: 'subTitle') dynamic subTitle,
       @JsonKey(name: 'stationName') dynamic stationName,
@@ -331,7 +331,7 @@ class __$$ResidenceItemImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? imagePath = null,
-    Object? madoriPathrl = null,
+    Object? madoriPath = null,
     Object? title = freezed,
     Object? subTitle = freezed,
     Object? stationName = freezed,
@@ -343,9 +343,9 @@ class __$$ResidenceItemImplCopyWithImpl<$Res>
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
               as String,
-      madoriPathrl: null == madoriPathrl
-          ? _value.madoriPathrl
-          : madoriPathrl // ignore: cast_nullable_to_non_nullable
+      madoriPath: null == madoriPath
+          ? _value.madoriPath
+          : madoriPath // ignore: cast_nullable_to_non_nullable
               as String,
       title: freezed == title ? _value.title! : title,
       subTitle: freezed == subTitle ? _value.subTitle! : subTitle,
@@ -361,7 +361,7 @@ class __$$ResidenceItemImplCopyWithImpl<$Res>
 class _$ResidenceItemImpl implements _ResidenceItem {
   const _$ResidenceItemImpl(
       {@JsonKey(name: 'imagePath') this.imagePath = '',
-      @JsonKey(name: 'madoriPath') this.madoriPathrl = '',
+      @JsonKey(name: 'madoriPath') this.madoriPath = '',
       @JsonKey(name: 'title') this.title = '',
       @JsonKey(name: 'subTitle') this.subTitle = '',
       @JsonKey(name: 'stationName') this.stationName = '',
@@ -376,7 +376,7 @@ class _$ResidenceItemImpl implements _ResidenceItem {
   final String imagePath;
   @override
   @JsonKey(name: 'madoriPath')
-  final String madoriPathrl;
+  final String madoriPath;
   @override
   @JsonKey(name: 'title')
   final dynamic title;
@@ -395,7 +395,7 @@ class _$ResidenceItemImpl implements _ResidenceItem {
 
   @override
   String toString() {
-    return 'ResidenceItem(imagePath: $imagePath, madoriPathrl: $madoriPathrl, title: $title, subTitle: $subTitle, stationName: $stationName, amount: $amount, floor: $floor)';
+    return 'ResidenceItem(imagePath: $imagePath, madoriPath: $madoriPath, title: $title, subTitle: $subTitle, stationName: $stationName, amount: $amount, floor: $floor)';
   }
 
   @override
@@ -405,8 +405,8 @@ class _$ResidenceItemImpl implements _ResidenceItem {
             other is _$ResidenceItemImpl &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
-            (identical(other.madoriPathrl, madoriPathrl) ||
-                other.madoriPathrl == madoriPathrl) &&
+            (identical(other.madoriPath, madoriPath) ||
+                other.madoriPath == madoriPath) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.subTitle, subTitle) &&
             const DeepCollectionEquality()
@@ -420,7 +420,7 @@ class _$ResidenceItemImpl implements _ResidenceItem {
   int get hashCode => Object.hash(
       runtimeType,
       imagePath,
-      madoriPathrl,
+      madoriPath,
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(subTitle),
       const DeepCollectionEquality().hash(stationName),
@@ -446,7 +446,7 @@ class _$ResidenceItemImpl implements _ResidenceItem {
 abstract class _ResidenceItem implements ResidenceItem {
   const factory _ResidenceItem(
       {@JsonKey(name: 'imagePath') final String imagePath,
-      @JsonKey(name: 'madoriPath') final String madoriPathrl,
+      @JsonKey(name: 'madoriPath') final String madoriPath,
       @JsonKey(name: 'title') final dynamic title,
       @JsonKey(name: 'subTitle') final dynamic subTitle,
       @JsonKey(name: 'stationName') final dynamic stationName,
@@ -461,7 +461,7 @@ abstract class _ResidenceItem implements ResidenceItem {
   String get imagePath;
   @override
   @JsonKey(name: 'madoriPath')
-  String get madoriPathrl;
+  String get madoriPath;
   @override
   @JsonKey(name: 'title')
   dynamic get title;
