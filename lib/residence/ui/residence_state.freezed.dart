@@ -202,20 +202,20 @@ ResidenceItem _$ResidenceItemFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ResidenceItem {
-  @JsonKey(name: 'imagePath')
-  String get imagePath => throw _privateConstructorUsedError;
-  @JsonKey(name: 'madoriPath')
-  String get madoriPath => throw _privateConstructorUsedError;
-  @JsonKey(name: 'title')
-  dynamic get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'subTitle')
-  dynamic get subTitle => throw _privateConstructorUsedError;
-  @JsonKey(name: 'stationName')
-  dynamic get stationName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'amount')
-  dynamic get amount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'floor')
-  dynamic get floor => throw _privateConstructorUsedError;
+  @JsonKey(name: 'imageUrl')
+  String get imageUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'floorPlanUrl')
+  String get floorPlanUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'propertyTitle')
+  dynamic get propertyTitle => throw _privateConstructorUsedError;
+  @JsonKey(name: 'price')
+  dynamic get price => throw _privateConstructorUsedError;
+  @JsonKey(name: 'access')
+  dynamic get access => throw _privateConstructorUsedError;
+  @JsonKey(name: 'roomDetails')
+  dynamic get roomDetails => throw _privateConstructorUsedError;
+  @JsonKey(name: 'buildingInfo')
+  dynamic get buildingInfo => throw _privateConstructorUsedError;
 
   /// Serializes this ResidenceItem to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -234,13 +234,13 @@ abstract class $ResidenceItemCopyWith<$Res> {
       _$ResidenceItemCopyWithImpl<$Res, ResidenceItem>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'imagePath') String imagePath,
-      @JsonKey(name: 'madoriPath') String madoriPath,
-      @JsonKey(name: 'title') dynamic title,
-      @JsonKey(name: 'subTitle') dynamic subTitle,
-      @JsonKey(name: 'stationName') dynamic stationName,
-      @JsonKey(name: 'amount') dynamic amount,
-      @JsonKey(name: 'floor') dynamic floor});
+      {@JsonKey(name: 'imageUrl') String imageUrl,
+      @JsonKey(name: 'floorPlanUrl') String floorPlanUrl,
+      @JsonKey(name: 'propertyTitle') dynamic propertyTitle,
+      @JsonKey(name: 'price') dynamic price,
+      @JsonKey(name: 'access') dynamic access,
+      @JsonKey(name: 'roomDetails') dynamic roomDetails,
+      @JsonKey(name: 'buildingInfo') dynamic buildingInfo});
 }
 
 /// @nodoc
@@ -258,42 +258,42 @@ class _$ResidenceItemCopyWithImpl<$Res, $Val extends ResidenceItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? imagePath = null,
-    Object? madoriPath = null,
-    Object? title = freezed,
-    Object? subTitle = freezed,
-    Object? stationName = freezed,
-    Object? amount = freezed,
-    Object? floor = freezed,
+    Object? imageUrl = null,
+    Object? floorPlanUrl = null,
+    Object? propertyTitle = freezed,
+    Object? price = freezed,
+    Object? access = freezed,
+    Object? roomDetails = freezed,
+    Object? buildingInfo = freezed,
   }) {
     return _then(_value.copyWith(
-      imagePath: null == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      madoriPath: null == madoriPath
-          ? _value.madoriPath
-          : madoriPath // ignore: cast_nullable_to_non_nullable
+      floorPlanUrl: null == floorPlanUrl
+          ? _value.floorPlanUrl
+          : floorPlanUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      title: freezed == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      propertyTitle: freezed == propertyTitle
+          ? _value.propertyTitle
+          : propertyTitle // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      subTitle: freezed == subTitle
-          ? _value.subTitle
-          : subTitle // ignore: cast_nullable_to_non_nullable
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      stationName: freezed == stationName
-          ? _value.stationName
-          : stationName // ignore: cast_nullable_to_non_nullable
+      access: freezed == access
+          ? _value.access
+          : access // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      amount: freezed == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
+      roomDetails: freezed == roomDetails
+          ? _value.roomDetails
+          : roomDetails // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      floor: freezed == floor
-          ? _value.floor
-          : floor // ignore: cast_nullable_to_non_nullable
+      buildingInfo: freezed == buildingInfo
+          ? _value.buildingInfo
+          : buildingInfo // ignore: cast_nullable_to_non_nullable
               as dynamic,
     ) as $Val);
   }
@@ -308,13 +308,13 @@ abstract class _$$ResidenceItemImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'imagePath') String imagePath,
-      @JsonKey(name: 'madoriPath') String madoriPath,
-      @JsonKey(name: 'title') dynamic title,
-      @JsonKey(name: 'subTitle') dynamic subTitle,
-      @JsonKey(name: 'stationName') dynamic stationName,
-      @JsonKey(name: 'amount') dynamic amount,
-      @JsonKey(name: 'floor') dynamic floor});
+      {@JsonKey(name: 'imageUrl') String imageUrl,
+      @JsonKey(name: 'floorPlanUrl') String floorPlanUrl,
+      @JsonKey(name: 'propertyTitle') dynamic propertyTitle,
+      @JsonKey(name: 'price') dynamic price,
+      @JsonKey(name: 'access') dynamic access,
+      @JsonKey(name: 'roomDetails') dynamic roomDetails,
+      @JsonKey(name: 'buildingInfo') dynamic buildingInfo});
 }
 
 /// @nodoc
@@ -330,28 +330,30 @@ class __$$ResidenceItemImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? imagePath = null,
-    Object? madoriPath = null,
-    Object? title = freezed,
-    Object? subTitle = freezed,
-    Object? stationName = freezed,
-    Object? amount = freezed,
-    Object? floor = freezed,
+    Object? imageUrl = null,
+    Object? floorPlanUrl = null,
+    Object? propertyTitle = freezed,
+    Object? price = freezed,
+    Object? access = freezed,
+    Object? roomDetails = freezed,
+    Object? buildingInfo = freezed,
   }) {
     return _then(_$ResidenceItemImpl(
-      imagePath: null == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      madoriPath: null == madoriPath
-          ? _value.madoriPath
-          : madoriPath // ignore: cast_nullable_to_non_nullable
+      floorPlanUrl: null == floorPlanUrl
+          ? _value.floorPlanUrl
+          : floorPlanUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      title: freezed == title ? _value.title! : title,
-      subTitle: freezed == subTitle ? _value.subTitle! : subTitle,
-      stationName: freezed == stationName ? _value.stationName! : stationName,
-      amount: freezed == amount ? _value.amount! : amount,
-      floor: freezed == floor ? _value.floor! : floor,
+      propertyTitle:
+          freezed == propertyTitle ? _value.propertyTitle! : propertyTitle,
+      price: freezed == price ? _value.price! : price,
+      access: freezed == access ? _value.access! : access,
+      roomDetails: freezed == roomDetails ? _value.roomDetails! : roomDetails,
+      buildingInfo:
+          freezed == buildingInfo ? _value.buildingInfo! : buildingInfo,
     ));
   }
 }
@@ -360,42 +362,42 @@ class __$$ResidenceItemImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ResidenceItemImpl implements _ResidenceItem {
   const _$ResidenceItemImpl(
-      {@JsonKey(name: 'imagePath') this.imagePath = '',
-      @JsonKey(name: 'madoriPath') this.madoriPath = '',
-      @JsonKey(name: 'title') this.title = '',
-      @JsonKey(name: 'subTitle') this.subTitle = '',
-      @JsonKey(name: 'stationName') this.stationName = '',
-      @JsonKey(name: 'amount') this.amount = '',
-      @JsonKey(name: 'floor') this.floor = ''});
+      {@JsonKey(name: 'imageUrl') this.imageUrl = '',
+      @JsonKey(name: 'floorPlanUrl') this.floorPlanUrl = '',
+      @JsonKey(name: 'propertyTitle') this.propertyTitle = '',
+      @JsonKey(name: 'price') this.price = '',
+      @JsonKey(name: 'access') this.access = '',
+      @JsonKey(name: 'roomDetails') this.roomDetails = '',
+      @JsonKey(name: 'buildingInfo') this.buildingInfo = ''});
 
   factory _$ResidenceItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$ResidenceItemImplFromJson(json);
 
   @override
-  @JsonKey(name: 'imagePath')
-  final String imagePath;
+  @JsonKey(name: 'imageUrl')
+  final String imageUrl;
   @override
-  @JsonKey(name: 'madoriPath')
-  final String madoriPath;
+  @JsonKey(name: 'floorPlanUrl')
+  final String floorPlanUrl;
   @override
-  @JsonKey(name: 'title')
-  final dynamic title;
+  @JsonKey(name: 'propertyTitle')
+  final dynamic propertyTitle;
   @override
-  @JsonKey(name: 'subTitle')
-  final dynamic subTitle;
+  @JsonKey(name: 'price')
+  final dynamic price;
   @override
-  @JsonKey(name: 'stationName')
-  final dynamic stationName;
+  @JsonKey(name: 'access')
+  final dynamic access;
   @override
-  @JsonKey(name: 'amount')
-  final dynamic amount;
+  @JsonKey(name: 'roomDetails')
+  final dynamic roomDetails;
   @override
-  @JsonKey(name: 'floor')
-  final dynamic floor;
+  @JsonKey(name: 'buildingInfo')
+  final dynamic buildingInfo;
 
   @override
   String toString() {
-    return 'ResidenceItem(imagePath: $imagePath, madoriPath: $madoriPath, title: $title, subTitle: $subTitle, stationName: $stationName, amount: $amount, floor: $floor)';
+    return 'ResidenceItem(imageUrl: $imageUrl, floorPlanUrl: $floorPlanUrl, propertyTitle: $propertyTitle, price: $price, access: $access, roomDetails: $roomDetails, buildingInfo: $buildingInfo)';
   }
 
   @override
@@ -403,29 +405,31 @@ class _$ResidenceItemImpl implements _ResidenceItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ResidenceItemImpl &&
-            (identical(other.imagePath, imagePath) ||
-                other.imagePath == imagePath) &&
-            (identical(other.madoriPath, madoriPath) ||
-                other.madoriPath == madoriPath) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.subTitle, subTitle) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
+            (identical(other.floorPlanUrl, floorPlanUrl) ||
+                other.floorPlanUrl == floorPlanUrl) &&
             const DeepCollectionEquality()
-                .equals(other.stationName, stationName) &&
-            const DeepCollectionEquality().equals(other.amount, amount) &&
-            const DeepCollectionEquality().equals(other.floor, floor));
+                .equals(other.propertyTitle, propertyTitle) &&
+            const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.access, access) &&
+            const DeepCollectionEquality()
+                .equals(other.roomDetails, roomDetails) &&
+            const DeepCollectionEquality()
+                .equals(other.buildingInfo, buildingInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      imagePath,
-      madoriPath,
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(subTitle),
-      const DeepCollectionEquality().hash(stationName),
-      const DeepCollectionEquality().hash(amount),
-      const DeepCollectionEquality().hash(floor));
+      imageUrl,
+      floorPlanUrl,
+      const DeepCollectionEquality().hash(propertyTitle),
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(access),
+      const DeepCollectionEquality().hash(roomDetails),
+      const DeepCollectionEquality().hash(buildingInfo));
 
   /// Create a copy of ResidenceItem
   /// with the given fields replaced by the non-null parameter values.
@@ -445,38 +449,39 @@ class _$ResidenceItemImpl implements _ResidenceItem {
 
 abstract class _ResidenceItem implements ResidenceItem {
   const factory _ResidenceItem(
-      {@JsonKey(name: 'imagePath') final String imagePath,
-      @JsonKey(name: 'madoriPath') final String madoriPath,
-      @JsonKey(name: 'title') final dynamic title,
-      @JsonKey(name: 'subTitle') final dynamic subTitle,
-      @JsonKey(name: 'stationName') final dynamic stationName,
-      @JsonKey(name: 'amount') final dynamic amount,
-      @JsonKey(name: 'floor') final dynamic floor}) = _$ResidenceItemImpl;
+          {@JsonKey(name: 'imageUrl') final String imageUrl,
+          @JsonKey(name: 'floorPlanUrl') final String floorPlanUrl,
+          @JsonKey(name: 'propertyTitle') final dynamic propertyTitle,
+          @JsonKey(name: 'price') final dynamic price,
+          @JsonKey(name: 'access') final dynamic access,
+          @JsonKey(name: 'roomDetails') final dynamic roomDetails,
+          @JsonKey(name: 'buildingInfo') final dynamic buildingInfo}) =
+      _$ResidenceItemImpl;
 
   factory _ResidenceItem.fromJson(Map<String, dynamic> json) =
       _$ResidenceItemImpl.fromJson;
 
   @override
-  @JsonKey(name: 'imagePath')
-  String get imagePath;
+  @JsonKey(name: 'imageUrl')
+  String get imageUrl;
   @override
-  @JsonKey(name: 'madoriPath')
-  String get madoriPath;
+  @JsonKey(name: 'floorPlanUrl')
+  String get floorPlanUrl;
   @override
-  @JsonKey(name: 'title')
-  dynamic get title;
+  @JsonKey(name: 'propertyTitle')
+  dynamic get propertyTitle;
   @override
-  @JsonKey(name: 'subTitle')
-  dynamic get subTitle;
+  @JsonKey(name: 'price')
+  dynamic get price;
   @override
-  @JsonKey(name: 'stationName')
-  dynamic get stationName;
+  @JsonKey(name: 'access')
+  dynamic get access;
   @override
-  @JsonKey(name: 'amount')
-  dynamic get amount;
+  @JsonKey(name: 'roomDetails')
+  dynamic get roomDetails;
   @override
-  @JsonKey(name: 'floor')
-  dynamic get floor;
+  @JsonKey(name: 'buildingInfo')
+  dynamic get buildingInfo;
 
   /// Create a copy of ResidenceItem
   /// with the given fields replaced by the non-null parameter values.

@@ -8,22 +8,22 @@ part of 'residence_state.dart';
 
 _$ResidenceItemImpl _$$ResidenceItemImplFromJson(Map<String, dynamic> json) =>
     _$ResidenceItemImpl(
-      imagePath: json['imagePath'] as String? ?? '',
-      madoriPath: json['madoriPath'] as String? ?? '',
-      title: json['title'] ?? '',
-      subTitle: json['subTitle'] ?? '',
-      stationName: json['stationName'] ?? '',
-      amount: json['amount'] ?? '',
-      floor: json['floor'] ?? '',
+      imageUrl: json['imageUrl'] as String? ?? '',
+      floorPlanUrl: json['floorPlanUrl'] as String? ?? '',
+      propertyTitle: json['propertyTitle'] ?? '',
+      price: json['price'] ?? '',
+      access: json['access'] ?? '',
+      roomDetails: json['roomDetails'] ?? '',
+      buildingInfo: json['buildingInfo'] ?? '',
     );
 
 Map<String, dynamic> _$$ResidenceItemImplToJson(_$ResidenceItemImpl instance) =>
     <String, dynamic>{
-      'imagePath': instance.imagePath,
-      'madoriPath': instance.madoriPath,
-      'title': instance.title,
-      'subTitle': instance.subTitle,
-      'stationName': instance.stationName,
-      'amount': instance.amount,
-      'floor': instance.floor,
+      'imageUrl': instance.imageUrl,
+      'floorPlanUrl': instance.floorPlanUrl,
+      'propertyTitle': instance.propertyTitle,
+      'price': instance.price,
+      'access': instance.access,
+      'roomDetails': instance.roomDetails,
+      'buildingInfo': instance.buildingInfo,
     };

@@ -258,8 +258,8 @@ class _PropertyList extends StatelessWidget {
             builder: (context, constraints) {
               final imageSize = constraints.maxWidth * 0.5;
               return _ImageWidget(
-                imagePath: data.imagePath,
-                madoriPath: data.madoriPath,
+                imagePath: data.imageUrl,
+                madoriPath: data.floorPlanUrl,
                 imageSize: imageSize,
               );
             },
@@ -272,7 +272,7 @@ class _PropertyList extends StatelessWidget {
                   children: [
                     const SizedBox(width: 10),
                     Text(
-                      data.title.toString(),
+                      data.propertyTitle.toString(),
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -285,7 +285,7 @@ class _PropertyList extends StatelessWidget {
                   children: [
                     const SizedBox(width: 10),
                     Text(
-                      data.subTitle.toString(),
+                      data.price.toString(),
                       style: const TextStyle(
                         color: Colors.red,
                         fontSize: 20,
@@ -303,7 +303,7 @@ class _PropertyList extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      data.stationName.toString(),
+                      data.access.toString(),
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -320,7 +320,7 @@ class _PropertyList extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      data.amount.toString(),
+                      data.roomDetails.toString(),
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -337,7 +337,7 @@ class _PropertyList extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      data.floor.toString(),
+                      data.buildingInfo.toString(),
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,

@@ -16,13 +16,13 @@ class ResidenceState with _$ResidenceState {
 @freezed
 class ResidenceItem with _$ResidenceItem {
   const factory ResidenceItem({
-    @JsonKey(name: 'imagePath') @Default('') String imagePath,
-    @JsonKey(name: 'madoriPath') @Default('') String madoriPath,
-    @JsonKey(name: 'title') @Default('') title,
-    @JsonKey(name: 'subTitle') @Default('') subTitle,
-    @JsonKey(name: 'stationName') @Default('') stationName,
-    @JsonKey(name: 'amount') @Default('') amount,
-    @JsonKey(name: 'floor') @Default('') floor,
+    @JsonKey(name: 'imageUrl') @Default('') String imageUrl,
+    @JsonKey(name: 'floorPlanUrl') @Default('') String floorPlanUrl,
+    @JsonKey(name: 'propertyTitle') @Default('') propertyTitle,
+    @JsonKey(name: 'price') @Default('') price,
+    @JsonKey(name: 'access') @Default('') access,
+    @JsonKey(name: 'roomDetails') @Default('') roomDetails,
+    @JsonKey(name: 'buildingInfo') @Default('') buildingInfo,
   }) = _ResidenceItem;
 
   factory ResidenceItem.fromJson(Map<String, dynamic> json) =>
