@@ -30,8 +30,8 @@ class MerucariPage extends StatelessWidget {
         child: const SingleChildScrollView(
           child: Column(
             children: [
-              _CategorySection(),
-              _ExhibitionSection(),
+              _ShortcutGridSection(),
+              _ListingSection(),
             ],
           ),
         ),
@@ -52,8 +52,8 @@ class MerucariPage extends StatelessWidget {
   }
 }
 
-class _CategorySection extends StatelessWidget {
-  const _CategorySection();
+class _ShortcutGridSection extends StatelessWidget {
+  const _ShortcutGridSection();
 
   String get howToStartSellingImage => 'images/how_to_start_selling.png';
 
@@ -195,8 +195,8 @@ class _CategorySection extends StatelessWidget {
   }
 }
 
-class _ListingList extends StatelessWidget {
-  const _ListingList(this.data);
+class _ListingCard extends StatelessWidget {
+  const _ListingCard(this.data);
   final MerucariItem data;
 
   @override
@@ -294,8 +294,8 @@ class _ListingList extends StatelessWidget {
   }
 }
 
-class _ExhibitionSection extends ConsumerWidget {
-  const _ExhibitionSection();
+class _ListingSection extends ConsumerWidget {
+  const _ListingSection();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -371,7 +371,7 @@ class _ExhibitionSection extends ConsumerWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 final data = state.merucariItems[index];
-                return _ListingList(data);
+                return _ListingCard(data);
               },
             ),
           ],
