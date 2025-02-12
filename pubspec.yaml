@@ -83,6 +83,7 @@ flutter:
     - images/madori.png
     - images/how_to_start_selling.png
     - images/camera.png
+    - images/noimage-1-580x440.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

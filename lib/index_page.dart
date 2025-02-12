@@ -4,7 +4,7 @@ import 'package:test/async/async_page.dart';
 import 'package:test/building/building_layout_page.dart';
 import 'package:test/qiita/ui/qiita_page.dart';
 import 'package:test/residence/residence_page.dart';
-import 'package:test/merucari/merucari_page.dart';
+import 'package:test/merucari/ui/merucari_page.dart';
 import 'package:test/youtube/youtube_page.dart';
 
 class IndexPage extends StatelessWidget {
