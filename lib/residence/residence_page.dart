@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:test/residence/ui/residence_state.dart';
+import 'package:test/residence/ui/residence_view_model.dart';
 
 class ResidencePage extends StatelessWidget {
   const ResidencePage({
@@ -9,10 +12,10 @@ class ResidencePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const _AppBarWidget(),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
-            const _RecommendedPropertiesCard(),
+            _RecommendedPropertiesCard(),
             _PropertySection(),
           ],
         ),
@@ -243,7 +246,7 @@ class _RecommendedPropertiesCard extends StatelessWidget {
 
 class _PropertyList extends StatelessWidget {
   const _PropertyList(this.data);
-  final PropertyInfo data;
+  final ResidenceItem data;
 
   @override
   Widget build(BuildContext context) {
@@ -254,23 +257,10 @@ class _PropertyList extends StatelessWidget {
           LayoutBuilder(
             builder: (context, constraints) {
               final imageSize = constraints.maxWidth * 0.5;
-              return Row(
-                children: [
-                  SizedBox(
-                    height: imageSize,
-                    width: imageSize,
-                    child: Image.asset(
-                      data.imagePath,
-                    ),
-                  ),
-                  SizedBox(
-                    height: imageSize,
-                    width: imageSize,
-                    child: Image.asset(
-                      data.madoriPath,
-                    ),
-                  ),
-                ],
+              return _ImageWidget(
+                imagePath: data.imagePath,
+                madoriPath: data.madoriPath,
+                imageSize: imageSize,
               );
             },
           ),
@@ -282,7 +272,7 @@ class _PropertyList extends StatelessWidget {
                   children: [
                     const SizedBox(width: 10),
                     Text(
-                      data.title,
+                      data.title.toString(),
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -295,7 +285,7 @@ class _PropertyList extends StatelessWidget {
                   children: [
                     const SizedBox(width: 10),
                     Text(
-                      data.subTitle,
+                      data.subTitle.toString(),
                       style: const TextStyle(
                         color: Colors.red,
                         fontSize: 20,
@@ -313,7 +303,7 @@ class _PropertyList extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      data.stationName,
+                      data.stationName.toString(),
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -330,7 +320,7 @@ class _PropertyList extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      data.amount,
+                      data.amount.toString(),
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -347,7 +337,7 @@ class _PropertyList extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      data.floor,
+                      data.floor.toString(),
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -414,63 +404,39 @@ class _PropertyList extends StatelessWidget {
   }
 }
 
-class PropertyInfo {
-  PropertyInfo({
-    required this.imagePath,
-    required this.madoriPath,
-    required this.title,
-    required this.subTitle,
-    required this.stationName,
-    required this.amount,
-    required this.floor,
-  });
-  final String imagePath;
-  final String madoriPath;
-  final String title;
-  final String subTitle;
-  final String stationName;
-  final String amount;
-  final String floor;
-}
-
-class _PropertySection extends StatelessWidget {
-  _PropertySection();
-
-  final String homeImage = 'images/home.png';
-  final String madoriImage = 'images/madori.png';
-
-  final List<PropertyInfo> _data = [
-    PropertyInfo(
-      imagePath: 'images/home.png',
-      madoriPath: 'images/madori.png',
-      title: 'Rising place 川崎',
-      subTitle: '2,000万円',
-      stationName: '京急本線 京急川崎駅 より 徒歩9分',
-      amount: '1K / 21.24m² 南西向き',
-      floor: '2階/15階建 築5年',
-    ),
-    PropertyInfo(
-      imagePath: 'images/home.png',
-      madoriPath: 'images/madori.png',
-      title: 'Rising place 川崎',
-      subTitle: '2,000万円',
-      stationName: '2,京急本線 京急川崎駅 より 徒歩9分',
-      amount: '1K / 21.24m² 南西向き',
-      floor: '2階/15階建 築5年',
-    ),
-  ];
+class _PropertySection extends ConsumerWidget {
+  const _PropertySection();
 
   @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _data.length,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        final data = _data[index];
-        return _PropertyList(data);
-      },
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(residenceViewModelProvider);
+    final notifier = ref.read(residenceViewModelProvider.notifier);
+
+    ref.listen(residenceViewModelProvider, (previous, next) {
+      if (previous == null) {
+        notifier.fetchResidenceItems();
+      }
+    });
+    if (state.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (state.isReadyData && state.residenceItems.isNotEmpty) {
+      return ListView.builder(
+        itemCount: state.residenceItems.length,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) {
+          final data = state.residenceItems[index];
+          return _PropertyList(data);
+        },
+      );
+    } else {
+      return const Center(
+        child: Text(
+          'データを取得できませんでした',
+          style: TextStyle(color: Colors.white),
+        ),
+      );
+    }
   }
 }
 
@@ -539,6 +505,50 @@ class BottomBarWidget extends StatelessWidget {
       selectedItemColor: Colors.teal,
       unselectedItemColor: Colors.grey,
       onTap: (int index) {},
+    );
+  }
+}
+
+class _ImageWidget extends StatelessWidget {
+  const _ImageWidget({
+    required this.imagePath,
+    required this.madoriPath,
+    required this.imageSize,
+  });
+
+  final String imagePath;
+  final String madoriPath;
+  final double imageSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        if (imagePath.isNotEmpty)
+          SizedBox(
+            height: imageSize,
+            width: imageSize,
+            child: Image.asset('images/home.png'),
+          )
+        else
+          SizedBox(
+            height: imageSize,
+            width: imageSize,
+            child: Image.asset('images/noimage-1-580x440.png'),
+          ),
+        if (madoriPath.isNotEmpty)
+          SizedBox(
+            height: imageSize,
+            width: imageSize,
+            child: Image.asset('images/home.png'),
+          )
+        else
+          SizedBox(
+            height: imageSize,
+            width: imageSize,
+            child: Image.asset('images/noimage-1-580x440.png'),
+          ),
+      ],
     );
   }
 }

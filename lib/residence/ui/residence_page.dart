@@ -15,8 +15,8 @@ class ResidencePage extends StatelessWidget {
       body: const SingleChildScrollView(
         child: Column(
           children: [
-            _RecommendedPropertiesCard(),
-            _PropertySection(),
+            _PropertySearchConditionCard(),
+            _PropertyListSection(),
           ],
         ),
       ),
@@ -131,8 +131,8 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class _RecommendedPropertiesCard extends StatelessWidget {
-  const _RecommendedPropertiesCard();
+class _PropertySearchConditionCard extends StatelessWidget {
+  const _PropertySearchConditionCard();
 
   @override
   Widget build(BuildContext context) {
@@ -244,8 +244,8 @@ class _RecommendedPropertiesCard extends StatelessWidget {
   }
 }
 
-class _PropertyList extends StatelessWidget {
-  const _PropertyList(this.data);
+class _PropertyCard extends StatelessWidget {
+  const _PropertyCard(this.data);
   final ResidenceItem data;
 
   @override
@@ -404,8 +404,8 @@ class _PropertyList extends StatelessWidget {
   }
 }
 
-class _PropertySection extends ConsumerWidget {
-  const _PropertySection();
+class _PropertyListSection extends ConsumerWidget {
+  const _PropertyListSection();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -426,7 +426,7 @@ class _PropertySection extends ConsumerWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           final data = state.residenceItems[index];
-          return _PropertyList(data);
+          return _PropertyCard(data);
         },
       );
     } else {
