@@ -15,8 +15,8 @@ class ResidencePage extends StatelessWidget {
       body: const SingleChildScrollView(
         child: Column(
           children: [
-            _PropertySearchConditionCard(),
-            _PropertyListSection(),
+            _RecommendedPropertiesCard(),
+            _PropertySection(),
           ],
         ),
       ),
@@ -131,8 +131,8 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class _PropertySearchConditionCard extends StatelessWidget {
-  const _PropertySearchConditionCard();
+class _RecommendedPropertiesCard extends StatelessWidget {
+  const _RecommendedPropertiesCard();
 
   @override
   Widget build(BuildContext context) {
@@ -244,8 +244,8 @@ class _PropertySearchConditionCard extends StatelessWidget {
   }
 }
 
-class _PropertyCard extends StatelessWidget {
-  const _PropertyCard(this.data);
+class _PropertyList extends StatelessWidget {
+  const _PropertyList(this.data);
   final ResidenceItem data;
 
   @override
@@ -404,8 +404,8 @@ class _PropertyCard extends StatelessWidget {
   }
 }
 
-class _PropertyListSection extends ConsumerWidget {
-  const _PropertyListSection();
+class _PropertySection extends ConsumerWidget {
+  const _PropertySection();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -426,7 +426,7 @@ class _PropertyListSection extends ConsumerWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           final data = state.residenceItems[index];
-          return _PropertyCard(data);
+          return _PropertyList(data);
         },
       );
     } else {
@@ -528,27 +528,25 @@ class _ImageWidget extends StatelessWidget {
           SizedBox(
             height: imageSize,
             width: imageSize,
-            child: Image.network(imagePath),
+            child: Image.asset('images/home.png'),
           )
         else
           SizedBox(
             height: imageSize,
             width: imageSize,
-            child: Image.asset('images/home.png'),
+            child: Image.asset('images/noimage-1-580x440.png'),
           ),
         if (madoriPath.isNotEmpty)
           SizedBox(
             height: imageSize,
             width: imageSize,
-            child: Image.network(
-              madoriPath,
-            ),
+            child: Image.asset('images/home.png'),
           )
         else
           SizedBox(
             height: imageSize,
             width: imageSize,
-            child: Image.asset('images/madori.png'),
+            child: Image.asset('images/noimage-1-580x440.png'),
           ),
       ],
     );
