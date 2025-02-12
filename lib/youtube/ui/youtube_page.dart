@@ -12,12 +12,12 @@ class YoutubePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: const _AppBarWidget(),
+      appBar: const _YoutubeAppBar(),
       body: const SingleChildScrollView(
         child: Column(
           children: [
-            _CategorySection(),
-            _VideoSection(),
+            _CategoryGridSection(),
+            _VideoListSection(),
           ],
         ),
       ),
@@ -50,8 +50,8 @@ class YoutubePage extends StatelessWidget {
   }
 }
 
-class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBarWidget();
+class _YoutubeAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _YoutubeAppBar();
 
   // PreferredSizeWidgetを実装するために必要
   @override
@@ -105,8 +105,8 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class _CategorySection extends StatelessWidget {
-  const _CategorySection();
+class _CategoryGridSection extends StatelessWidget {
+  const _CategoryGridSection();
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +179,6 @@ class _CategorySection extends StatelessWidget {
   }
 }
 
-// インナークラス　(他の箇所からアクセスできないようにする)
 class _CategoryTile extends StatelessWidget {
   const _CategoryTile({
     required this.label,
@@ -217,8 +216,8 @@ class _CategoryTile extends StatelessWidget {
   }
 }
 
-class _VideoScreen extends StatelessWidget {
-  const _VideoScreen(this.data);
+class _VideoItem extends StatelessWidget {
+  const _VideoItem(this.data);
   final YoutubeItem data;
 
   @override
@@ -230,7 +229,7 @@ class _VideoScreen extends StatelessWidget {
           if (data.imagePath.isNotEmpty)
             Image.network(data.imagePath)
           else
-            Image.asset('images/arashiyoutube.png'),
+            Image.asset('images/noimage-1-580x440.png'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -296,10 +295,8 @@ class _VideoScreen extends StatelessWidget {
   }
 }
 
-// 2. ダミーデータの作成
-class _VideoSection extends ConsumerWidget {
-  // できればConsumerStatefulWidgetをつかはない方が良い
-  const _VideoSection();
+class _VideoListSection extends ConsumerWidget {
+  const _VideoListSection();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -342,7 +339,7 @@ class _VideoSection extends ConsumerWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   final data = state.youtubeItems[index];
-                  return _VideoScreen(data);
+                  return _VideoItem(data);
                 },
               ),
             ],
