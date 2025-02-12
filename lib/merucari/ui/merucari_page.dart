@@ -209,15 +209,18 @@ class _ListingCard extends StatelessWidget {
             Row(
               children: [
                 const SizedBox(width: 10),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    data.imageUrl,
-                    height: 60,
-                    width: 60,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                if (data.imageUrl.isNotEmpty)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      data.imageUrl,
+                      height: 60,
+                      width: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                else
+                  Image.asset('images/noimage-1-580x440.png'),
                 Row(
                   children: [
                     const SizedBox(width: 10),
