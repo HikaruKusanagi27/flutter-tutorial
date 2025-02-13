@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:test/drift/database.dart';
 import 'package:test/index_page.dart';
+import 'package:drift/drift.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final database = AppDatabase();
+
   runApp(
     const ProviderScope(
       child: MyApp(),
