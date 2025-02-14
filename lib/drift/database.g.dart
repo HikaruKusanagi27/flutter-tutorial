@@ -22,8 +22,7 @@ class $TodoItemsTable extends TodoItems
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
       'title', aliasedName, false,
-      additionalChecks:
-          GeneratedColumn.checkTextLength(minTextLength: 6, maxTextLength: 32),
+      additionalChecks: GeneratedColumn.checkTextLength(),
       type: DriftSqlType.string,
       requiredDuringInsert: true);
   static const VerificationMeta _contentMeta =

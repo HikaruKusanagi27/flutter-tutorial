@@ -103,9 +103,7 @@ class IndexPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute<QiitaPage>(
-                    builder: (context) => DriftPage(
-                      database: AppDatabase(),
-                    ),
+                    builder: (context) => DriftPage(),
                   ),
                 );
               },
