@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:test/youtube/ui/youtube_state.dart';
+import 'package:test/youtube/ui/youtube_view_model.dart';
 
 class YoutubePage extends StatelessWidget {
   const YoutubePage({
@@ -9,12 +12,12 @@ class YoutubePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: const _AppBarWidget(),
-      body: SingleChildScrollView(
+      appBar: const _YoutubeAppBar(),
+      body: const SingleChildScrollView(
         child: Column(
           children: [
-            const _CategorySection(),
-            _VideoSection(),
+            _CategoryGridSection(),
+            _VideoListSection(),
           ],
         ),
       ),
@@ -47,8 +50,8 @@ class YoutubePage extends StatelessWidget {
   }
 }
 
-class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBarWidget();
+class _YoutubeAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const _YoutubeAppBar();
 
   // PreferredSizeWidgetを実装するために必要
   @override
@@ -102,8 +105,8 @@ class _AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class _CategorySection extends StatelessWidget {
-  const _CategorySection();
+class _CategoryGridSection extends StatelessWidget {
+  const _CategoryGridSection();
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +179,6 @@ class _CategorySection extends StatelessWidget {
   }
 }
 
-// インナークラス　(他の箇所からアクセスできないようにする)
 class _CategoryTile extends StatelessWidget {
   const _CategoryTile({
     required this.label,
@@ -214,9 +216,9 @@ class _CategoryTile extends StatelessWidget {
   }
 }
 
-class _VideoList extends StatelessWidget {
-  const _VideoList(this.data);
-  final MovieInfo data;
+class _VideoItem extends StatelessWidget {
+  const _VideoItem(this.data);
+  final YoutubeItem data;
 
   @override
   Widget build(BuildContext context) {
@@ -224,8 +226,10 @@ class _VideoList extends StatelessWidget {
       color: Colors.grey[900],
       child: Column(
         children: [
-          Image.asset(data.imagePath),
-          const SizedBox(height: 10),
+          if (data.imagePath.isNotEmpty)
+            Image.network(data.imagePath)
+          else
+            Image.asset('images/noimage-1-580x440.png'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -236,88 +240,76 @@ class _VideoList extends StatelessWidget {
                     width: 35,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
-                      child: Image.asset(data.iconPath),
+                      child: Image.network(data.iconPath),
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.title,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    data.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(width: 10),
-              const Column(
+              const Row(
                 children: [
-                  Icon(Icons.more_vert, color: Colors.white),
-                  SizedBox(height: 14),
+                  Icon(
+                    Icons.more_vert,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 10),
                 ],
               ),
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(width: 54),
-              Text(
-                data.subTitle,
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontSize: 14,
-                ),
+              Row(
+                children: [
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    width: 35,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    '${data.channelName}・${data.numOfViews}万回視聴'
+                    '・${data.daysAgo}日前',
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-          const SizedBox(height: 10),
         ],
       ),
     );
   }
 }
 
-// 1. クラスを作成
-class MovieInfo {
-  MovieInfo({
-    required this.imagePath,
-    required this.iconPath,
-    required this.title,
-    required this.subTitle,
-  });
-  final String imagePath; // サムネイル画像のパス
-  final String iconPath; // アイコン画像のパス
-  final String title; // 動画タイトル
-  final String subTitle; // サブタイトル
-}
-
-// 2. ダミーデータの作成
-class _VideoSection extends StatelessWidget {
-  _VideoSection();
-
-  final List<MovieInfo> _dummyMovieData = [
-    MovieInfo(
-      imagePath: 'images/arashiyoutube.png',
-      iconPath: 'images/arashiicon.png',
-      title: '"This is ARASHI LIVE 2020.12.31" Digest\nMovie',
-      subTitle: 'ARASHI・127万 回視聴・1日前',
-    ),
-    MovieInfo(
-      imagePath: 'images/arashiyoutube.png',
-      iconPath: 'images/arashiicon.png',
-      title: '"This is ARASHI LIVE 2020.12.31" Digest\nMovie',
-      subTitle: 'ARASHI・127万 回視聴・1日前',
-    ),
-  ];
+class _VideoListSection extends ConsumerWidget {
+  const _VideoListSection();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(youtubeViewModelProvider);
+    final notifier = ref.read(youtubeViewModelProvider.notifier);
+
+    ref.listen(youtubeViewModelProvider, (previous, next) {
+      if (previous == null) {
+        notifier.fetchYoutubeItems();
+      }
+    });
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
           color: Colors.grey[900],
@@ -336,15 +328,29 @@ class _VideoSection extends StatelessWidget {
             ],
           ),
         ),
-        ListView.builder(
-          itemCount: _dummyMovieData.length,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            final data = _dummyMovieData[index];
-            return _VideoList(data);
-          },
-        ),
+        if (state.isLoading)
+          const Center(child: CircularProgressIndicator())
+        else if (state.isReadyData && state.youtubeItems.isNotEmpty)
+          Stack(
+            children: [
+              ListView.builder(
+                itemCount: state.youtubeItems.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final data = state.youtubeItems[index];
+                  return _VideoItem(data);
+                },
+              ),
+            ],
+          )
+        else
+          const Center(
+            child: Text(
+              'データを取得できませんでした',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
       ],
     );
   }
