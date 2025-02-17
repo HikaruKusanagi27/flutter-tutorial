@@ -63,10 +63,10 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
   build_runner: ^2.4.13
-  riverpod_generator: 2.4.0
   freezed: ^2.5.1
   retrofit_generator: ^8.0.3
   json_serializable: ^6.7.1
+  riverpod_generator: 2.4.0
   drift_dev: ^2.13.0
 
 # For information on the generic Dart part of this file, see the
