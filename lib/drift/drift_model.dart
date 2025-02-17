@@ -1,17 +1,19 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:test/drift/database.dart';
 
-final databaseProvider = Provider((ref) => AppDatabase());
+part 'drift_model.g.dart';
 
-final todoListProvider = StreamProvider((ref) {
+@Riverpod(keepAlive: true)
+AppDatabase database(DatabaseRef ref) => AppDatabase();
+
+@riverpod
+Stream<List<TodoItem>> todoList(TodoListRef ref) {
   final database = ref.watch(databaseProvider);
   return database.watchTodoItems();
-});
+}
 
-final todoNotifierProvider =
-    NotifierProvider<TodoNotifier, void>(TodoNotifier.new);
-
-class TodoNotifier extends Notifier<void> {
+@riverpod
+class TodoNotifier extends _$TodoNotifier {
   @override
   void build() {}
 
