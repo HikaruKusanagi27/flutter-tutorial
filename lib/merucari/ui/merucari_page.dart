@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:test/merucari/ui/merucari_state.dart';
+import 'package:test/merucari/ui/merucari_view_model.dart';
 
 class MerucariPage extends StatelessWidget {
   const MerucariPage({
@@ -24,11 +27,11 @@ class MerucariPage extends StatelessWidget {
       ),
       body: Container(
         color: Colors.grey[300],
-        child: SingleChildScrollView(
+        child: const SingleChildScrollView(
           child: Column(
             children: [
-              const _CategorySection(),
-              _ExhibitionSection(),
+              _ShortcutGridSection(),
+              _ListingSection(),
             ],
           ),
         ),
@@ -49,8 +52,8 @@ class MerucariPage extends StatelessWidget {
   }
 }
 
-class _CategorySection extends StatelessWidget {
-  const _CategorySection();
+class _ShortcutGridSection extends StatelessWidget {
+  const _ShortcutGridSection();
 
   String get howToStartSellingImage => 'images/how_to_start_selling.png';
 
@@ -192,9 +195,9 @@ class _CategorySection extends StatelessWidget {
   }
 }
 
-class _ListingList extends StatelessWidget {
-  const _ListingList(this.data);
-  final ListingInfo data;
+class _ListingCard extends StatelessWidget {
+  const _ListingCard(this.data);
+  final MerucariItem data;
 
   @override
   Widget build(BuildContext context) {
@@ -206,15 +209,18 @@ class _ListingList extends StatelessWidget {
             Row(
               children: [
                 const SizedBox(width: 10),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    data.imagePath,
-                    height: 60,
-                    width: 60,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                if (data.imageUrl.isNotEmpty)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      data.imageUrl,
+                      height: 60,
+                      width: 60,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                else
+                  Image.asset('images/noimage-1-580x440.png'),
                 Row(
                   children: [
                     const SizedBox(width: 10),
@@ -222,15 +228,17 @@ class _ListingList extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          data.productName,
+                          data.itemTitle,
                           style: const TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          data.amount,
+                          '¥${data.price}',
                           style: const TextStyle(
                             fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         Row(
@@ -241,7 +249,7 @@ class _ListingList extends StatelessWidget {
                               size: 15,
                             ),
                             Text(
-                              data.numberOfViews,
+                              data.peopleSearching,
                               style: const TextStyle(
                                 fontSize: 12,
                               ),
@@ -289,121 +297,97 @@ class _ListingList extends StatelessWidget {
   }
 }
 
-class ListingInfo {
-  ListingInfo({
-    required this.imagePath,
-    required this.productName,
-    required this.amount,
-    required this.numberOfViews,
-  });
-  final String imagePath;
-  final String productName;
-  final String amount;
-  final String numberOfViews;
-}
-
-class _ExhibitionSection extends StatelessWidget {
-  _ExhibitionSection();
-
-  final List<ListingInfo> _data = [
-    ListingInfo(
-      imagePath: 'images/camera.png',
-      productName: 'sony a7iii',
-      amount: '¥5555.0',
-      numberOfViews: '800人が探しています',
-    ),
-    ListingInfo(
-      imagePath: 'images/camera.png',
-      productName: 'sony a7iii',
-      amount: '¥5555.0',
-      numberOfViews: '800人が探しています',
-    ),
-    ListingInfo(
-      imagePath: 'images/camera.png',
-      productName: 'sony a7iii',
-      amount: '¥5555.0',
-      numberOfViews: '800人が探しています',
-    ),
-    ListingInfo(
-      imagePath: 'images/camera.png',
-      productName: 'sony a7iii',
-      amount: '¥5555.0',
-      numberOfViews: '800人が探しています',
-    ),
-    ListingInfo(
-      imagePath: 'images/camera.png',
-      productName: 'sony a7iii',
-      amount: '¥5555.0',
-      numberOfViews: '800人が探しています',
-    ),
-  ];
+class _ListingSection extends ConsumerWidget {
+  const _ListingSection();
 
   @override
-  Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Colors.white,
-      child: Column(
-        children: [
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Row(
-                children: [
-                  SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '売れやすい持ち物',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        '使わないモノを出品してみよう！',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'すべてを見る＞',
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(merucariViewModelProvider);
+    final notifier = ref.read(merucariViewModelProvider.notifier);
+
+    ref.listen(merucariViewModelProvider, (previous, next) {
+      if (previous == null) {
+        notifier.fetchMerucariItems();
+      }
+    });
+    if (state.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (state.isReadyData && state.merucariItems.isNotEmpty) {
+      return ColoredBox(
+        color: Colors.white,
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    const SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          '売れやすい持ち物',
                           style: TextStyle(
-                            color: Colors.blue[500],
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Divider(
-            thickness: 0.5,
-            color: Colors.grey[300],
-          ),
-          ListView.builder(
-            itemCount: _data.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              final data = _data[index];
-              return _ListingList(data);
-            },
-          ),
-        ],
-      ),
-    );
+                        const SizedBox(height: 5),
+                        Text(
+                          '使わないモノを出品してみよう！',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'すべてを見る＞',
+                            style: TextStyle(
+                              color: Colors.blue[500],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Divider(
+              thickness: 0.5,
+              color: Colors.grey[300],
+            ),
+            ListView.builder(
+              itemCount: state.merucariItems.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final data = state.merucariItems[index];
+                return _ListingCard(data);
+              },
+            ),
+          ],
+        ),
+      );
+    } else {
+      return const Center(
+        child: Text(
+          'データを取得できませんでした',
+          style: TextStyle(color: Colors.white),
+        ),
+      );
+    }
   }
 }
 
