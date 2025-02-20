@@ -14,7 +14,12 @@ class TodoItems extends Table {
   DateTimeColumn get createdAt => dateTime().nullable()();
 }
 
-@DriftDatabase(tables: [TodoItems])
+class Scores extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get highScore => integer()();
+}
+
+@DriftDatabase(tables: [TodoItems, Scores])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
@@ -40,6 +45,25 @@ class AppDatabase extends _$AppDatabase {
 
   Future<void> deleteTodoItem(TodoItem todoItem) {
     return (delete(todoItems)..where((tbl) => tbl.id.equals(todoItem.id))).go();
+  }
+
+  Future<int> getHighScore() async {
+    final result = await select(scores).get();
+    return result.isEmpty ? 0 : result.first.highScore;
+  }
+
+  Future<bool> updateHighScore(int score) async {
+    final currentScore = await getHighScore();
+    if (score > currentScore) {
+      await into(scores).insert(
+        ScoresCompanion.insert(
+          highScore: score,
+        ),
+        mode: InsertMode.insertOrReplace,
+      );
+      return true;
+    }
+    return false;
   }
 }
 
