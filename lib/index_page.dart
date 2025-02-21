@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:test/animation/animation_page.dart';
 import 'package:test/async/async_page.dart';
 import 'package:test/building/building_layout_page.dart';
+import 'package:test/countupgame/ui/count_up_game_home_page.dart';
+import 'package:test/drift/database.dart';
+import 'package:test/drift/drift_page.dart';
 import 'package:test/qiita/ui/qiita_page.dart';
 import 'package:test/merucari/ui/merucari_page.dart';
 import 'package:test/residence/ui/residence_page.dart';
 import 'package:test/youtube/ui/youtube_page.dart';
 
 class IndexPage extends StatelessWidget {
-  const IndexPage({super.key});
+  const IndexPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +98,28 @@ class IndexPage extends StatelessWidget {
                 );
               },
               child: const Text('Tutorial6 MVVM'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<QiitaPage>(
+                    builder: (context) => DriftPage(),
+                  ),
+                );
+              },
+              child: const Text('Tutorial8 Drift'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<CountUpGameHomePage>(
+                    builder: (context) => const CountUpGameHomePage(),
+                  ),
+                );
+              },
+              child: const Text('Tutorial9 CountUpGame'),
             ),
           ],
         ),
