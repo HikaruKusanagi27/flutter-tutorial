@@ -24,6 +24,11 @@ class CountUpGameHomePage extends ConsumerWidget {
               style: TextStyle(fontSize: 50),
             ),
             highScore.when(
+              //whenメソッドは、非同期データ（AsyncValue）を扱う際に使用される便利なメソッド。
+              //主に以下の3つの状態を処理することができる：
+              //データ取得中（loading）
+              //データ取得成功（data）
+              //エラー発生（error）
               data: (score) => Text(
                 '$score',
                 style: const TextStyle(
