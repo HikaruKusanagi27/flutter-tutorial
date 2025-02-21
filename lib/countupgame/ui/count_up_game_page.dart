@@ -18,6 +18,7 @@ class _CountUpGamePageState extends ConsumerState<CountUpGamePage> {
   @override
   void initState() {
     super.initState();
+    print('initState');
     _confettiController =
         ConfettiController(duration: const Duration(seconds: 10));
     startTimer();
@@ -25,6 +26,8 @@ class _CountUpGamePageState extends ConsumerState<CountUpGamePage> {
 
   @override
   void dispose() {
+    print('dispose');
+    // dialogの場合は不要。
     _confettiController.dispose();
     super.dispose();
   }
@@ -60,16 +63,21 @@ class _CountUpGamePageState extends ConsumerState<CountUpGamePage> {
     final gameState = ref.watch(gameStateProvider);
     final highScore = ref.watch(highScoreProvider).value ?? 0;
 
+    print('gameState.count: ${gameState.count}, highScore: $highScore');
+    print(gameState.count >= highScore && gameState.remainingSeconds == 0);
+    print('build'); // プリント文を書いてデバック力を上げる
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: const MaterialColor(0xFFFEADDFF, {}),
-        title: const Text('Count Up Game'),
+        title: const Text('Count Up Game'), // const 定数のため
       ),
       body: Stack(
         children: [
+          // アニメーション
           //ハイスコアを超えている場合、ゲームが終了している場合
-          if (gameState.count > highScore && gameState.remainingSeconds == 0)
+          if (gameState.count >= highScore && gameState.remainingSeconds == 0)
             Align(
               alignment: Alignment.topCenter,
               child: ConfettiWidget(
